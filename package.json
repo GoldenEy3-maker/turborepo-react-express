@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "prisma": "turbo run db:generate"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.9.7",
+    "turbo": "^1.9.7"
+  },
+  "name": "solid-express",
+  "packageManager": "npm@9.5.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

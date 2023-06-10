@@ -1,0 +1,11 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  font-size: var(--headline-l-fs);
+
+  b {
+    color: hsl(var(--primary-hsl));
+  }
+}

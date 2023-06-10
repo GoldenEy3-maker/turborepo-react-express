@@ -1,0 +1,68 @@
+:root {
+  /* HSL BASE */
+  --background-base-hsl: 0, 0%;
+  --primary-base-hsl: 274, 69%;
+  --primary-container-base-hsl: 0, 0%;
+  --on-primary-base-hsl: 0, 0%;
+  --default-hover-base-hsl: 0, 0%;
+  --danger-base-hsl: 0, 100%;
+  --success-container-base-hsl: 118, 100%;
+  --success-base-hsl: 118, 49%;
+  --warning-container-base-hsl: 54, 100%;
+  --warning-base-hsl: 54, 73%;
+  --loading-skeleton-base-hsl: 0, 0%;
+
+  /* HSL */
+  --background-hsl: var(--background-base-hsl), 7%;
+  --on-background-hsl: var(--background-base-hsl), 100%;
+  --surface-hsl: var(--background-base-hsl), 15%;
+  --surface-container-low-hsl: var(--primary-base-hsl), 96%;
+  --surface-container-high-hsl: var(--primary-base-hsl), 93%;
+  --surface-container-highest-hsl: var(--primary-base-hsl), 92%;
+  --primary-hsl: var(--primary-base-hsl), 80%;
+  --primary-container-hsl: var(--primary-container-base-hsl), 22%;
+  --on-primary-hsl: var(--primary-base-hsl), 20%;
+  --hover-primary-hsl: var(--primary-base-hsl), 44%;
+  --outline-hsl: var(--background-base-hsl), 50%;
+  --ripple-hsl: var(--primary-hsl);
+  --default-hover-hsl: var(--default-hover-base-hsl), 90%;
+  --danger-container-hsl: var(--danger-base-hsl), 96%;
+  --danger-hsl: var(--danger-base-hsl), 70%;
+  --hover-danger-container-hsl: var(--danger-base-hsl), 93%;
+  --success-container-hsl: var(--success-container-base-hsl), 85%;
+  --success-hsl: var(--success-base-hsl), 50%;
+  --warning-hsl: var(--warning-base-hsl), 60%;
+  --warning-container-hsl: var(--warning-container-base-hsl), 92%;
+  --loading-skeleton-hsl: var(--loading-skeleton-base-hsl), 96%;
+  --active-loading-skeleton-hsl: var(--loading-skeleton-base-hsl), 92%;
+
+  /* Sizes */
+  --container-mw: calc(1400px + var(--container-pgi) * 2);
+  --container-pgi: 1rem;
+  --safe-area-pd: 1.5rem;
+
+  /* UTILS */
+  --primary-y-offset-bxs: 8px;
+  --primary-offset-bxs: 0 var(--primary-y-offset-bxs) 24px;
+  --primary-alpha-bxs: 0.15;
+
+  --medium-shape: 12px;
+  --large-shape: 16px;
+
+  --backdrop-filter-blur: 6px;
+
+  /* FONTS */
+  --main-ff: "Inter", sans-serif;
+
+  --display-s-fs: 36px;
+  --headline-l-fs: 32px;
+  --headline-m-fs: 28px;
+  --title-l-fs: 22px;
+  --body-extra-fs: 18px;
+  --body-l-fs: 16px;
+  --body-m-fs: 14px;
+  --body-s-fs: 12px;
+
+  font-family: var(--main-ff);
+  line-height: 1.5;
+}

@@ -1,0 +1,111 @@
+.button {
+  --_color: var(--primary-hsl);
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: hsla(var(--_color));
+
+  padding: 0.5rem 1.3rem;
+
+  border-radius: 40px;
+
+  transition: 200ms ease;
+
+  svg {
+    fill: hsla(var(--_color));
+  }
+
+  &._icon {
+    padding: 0.5rem;
+  }
+
+  &._elevated {
+    background-color: hsla(var(--primary-base-hsl), 70%, 0.15);
+  }
+
+  &._filled {
+    --ripple-hsl: var(--background-hsl);
+
+    --_color: var(--on-primary-hsl);
+
+    background-color: hsl(var(--primary-hsl));
+  }
+
+  &[type="submit"] {
+    gap: 0;
+  }
+
+  &:disabled {
+    --_color: var(--primary-hsl), 0.5;
+
+    cursor: not-allowed;
+
+    &._filled {
+      background-color: hsla(var(--primary-hsl), 0.6);
+    }
+
+    &[type="submit"] {
+      gap: 0.5rem;
+
+      .loader {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    background-color: hsla(var(--primary-hsl), 0.1);
+
+    &._filled {
+      background-color: hsl(var(--primary-base-hsl), 75%);
+    }
+
+    &._elevated {
+      background-color: hsla(var(--primary-base-hsl), 70%, 0.2);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(:disabled) {
+      background-color: hsla(var(--primary-hsl), 0.1);
+
+      &._filled {
+        background-color: hsl(var(--primary-base-hsl), 75%);
+      }
+
+      &._elevated {
+        background-color: hsla(var(--primary-base-hsl), 70%, 0.25);
+      }
+    }
+  }
+}
+
+.loader {
+  flex-shrink: 0;
+
+  display: grid;
+  grid-template-columns: 0fr;
+
+  transition: 300ms ease;
+
+  span {
+    overflow: hidden;
+
+    animation: loading 1000ms linear infinite;
+  }
+}
+
+@keyframes loading {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: -360deg;
+  }
+}
