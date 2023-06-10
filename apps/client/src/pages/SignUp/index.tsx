@@ -78,7 +78,10 @@ const SignUpPage: Component = () => {
       showResponseMessage(error.message, "danger")
     },
     onSuccess(data) {
-      showResponseMessage(data.message, "success")
+      showResponseMessage(
+        data.message + "\nТеперь вы можете авторизоваться по ссылке ниже",
+        "success"
+      )
 
       resetButtonRef?.click()
     },
