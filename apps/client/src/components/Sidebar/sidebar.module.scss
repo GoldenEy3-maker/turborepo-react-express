@@ -8,8 +8,119 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--safe-area-pd);
+
+  overflow: auto;
 
   flex: 0 1 20rem;
 
   padding: var(--safe-area-pd);
+}
+
+.nav {
+  &List {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  &Divider {
+    background-color: hsla(var(--on-background-hsl), 0.1);
+    height: 2px;
+  }
+
+  &Item {
+    a {
+      position: relative;
+      overflow: hidden;
+
+      padding: 1rem;
+
+      border-radius: var(--large-shape);
+
+      color: var(--on-background-hsl);
+      font-size: var(--title-l-fs);
+
+      line-height: 150%;
+
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+
+      transition: 200ms ease;
+
+      svg {
+        width: 28px;
+        height: 28px;
+        transition: 200ms ease;
+      }
+
+      &:focus {
+        outline: none;
+
+        background-color: hsla(var(--primary-hsl), 0.1);
+
+        color: hsl(var(--primary-hsl));
+
+        svg {
+          fill: hsl(var(--primary-hsl));
+        }
+      }
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &Item {
+      a:hover {
+        background-color: hsla(var(--primary-hsl), 0.1);
+
+        color: hsl(var(--primary-hsl));
+
+        svg {
+          fill: hsl(var(--primary-hsl));
+        }
+      }
+    }
+  }
+}
+
+.profile {
+  margin-top: auto;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &Wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+
+    overflow: hidden;
+  }
+
+  &Img {
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &Name {
+    font-size: var(--title-l-fs);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

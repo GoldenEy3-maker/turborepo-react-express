@@ -30,6 +30,12 @@ body {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
+
+  &[data-lock="true"] {
+    overflow: hidden;
+
+    padding-right: var(--scrollbar-width);
+  }
 }
 
 svg {

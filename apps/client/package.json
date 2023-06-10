@@ -18,9 +18,9 @@
     "eslint-plugin-solid": "^0.12.1",
     "sass": "^1.62.1",
     "typescript": "^4.9.5",
+    "utils": "*",
     "vite": "^4.1.1",
-    "vite-plugin-solid": "^2.5.0",
-    "utils": "*"
+    "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
     "@solid-primitives/input-mask": "^0.2.0",
@@ -31,10 +31,12 @@
     "js-cookie": "^3.0.5",
     "server": "*",
     "solid-form-action": "^0.3.0",
-    "solid-js": "^1.7.6",
+    "solid-js": "^1.6.13",
     "solid-trpc": "^0.0.11-rc.3",
+    "solid-zustand": "^1.7.0",
     "superjson": "^1.12.3",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zustand": "^4.3.8"
   },
   "main": "index.js",
   "keywords": [],

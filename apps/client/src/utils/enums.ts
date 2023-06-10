@@ -2,8 +2,8 @@ import type { ValueOf } from "utils/types"
 
 export const RouterPaths = {
   HomePage: "/",
-  SignInPage: "/signin",
-  SignUpPage: "/signup",
+  SignInPage: "/sign-in",
+  SignUpPage: "/sign-up",
 } as const
 
 export const InputMaskPatterns = {

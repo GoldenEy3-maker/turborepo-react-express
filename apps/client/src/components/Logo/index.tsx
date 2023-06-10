@@ -1,4 +1,4 @@
-import { setStaticClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import { Show, splitProps, type Component, type JSX } from "solid-js"
 import styles from "./logo.module.scss"
 
@@ -10,7 +10,7 @@ const Logo: Component<LogoProps> = (props) => {
   const [splitedProps, restProps] = splitProps(props, ["isMinimized"])
 
   return (
-    <div {...restProps} class={setStaticClass(restProps.class, styles.logo)}>
+    <div {...restProps} class={cls([restProps.class, styles.logo])}>
       <span>
         <svg
           width="48"

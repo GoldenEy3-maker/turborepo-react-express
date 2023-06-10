@@ -3,9 +3,9 @@ import type { Component } from "solid-js"
 import { lazy } from "solid-js"
 import { RouterPaths } from "./utils/enums"
 
-const MainLayout = lazy(() => import("./layout/Main"))
+const MainLayout = lazy(() => import("./layouts/Main"))
 const HomePage = lazy(() => import("./pages/Home"))
-const AuthLayout = lazy(() => import("./layout/Auth"))
+const AuthLayout = lazy(() => import("./layouts/Auth"))
 const SignInPage = lazy(() => import("./pages/SignIn"))
 const SignUpPage = lazy(() => import("./pages/SignUp"))
 

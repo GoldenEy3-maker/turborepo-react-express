@@ -1,33 +1,15 @@
-import { useNavigate } from "@solidjs/router"
-import Cookies from "js-cookie"
+export const cls = (cls: (string | undefined)[], conditionCls?: Record<string, boolean>) => {
+  const cloneCls = cls.filter(c => c !== undefined)
 
-export const withAuthProtect = () => {
-  const navigate = useNavigate()
-  const authToken = Cookies.get("auth_token")
-
-  if (!authToken) navigate("/auth", { replace: true })
-}
-
-export const setDynamicClass = ({
-  statics,
-  dynamics,
-  conditions,
-}: {
-  statics: (string | undefined)[]
-  dynamics: string[][]
-  conditions: boolean[]
-}) => {
-  const classes = statics.filter((cls) => cls !== undefined)
-
-  for (let i = 0;i < conditions.length;i++) {
-    if (conditions[i]) {
-      dynamics[i].forEach((internalDnClass) => classes.push(internalDnClass))
-    }
+  if (conditionCls) {
+    Object.keys(conditionCls).map(key => {
+      if (conditionCls[key]) {
+        cloneCls.push(key)
+      }
+    })
   }
 
-  return classes.join(" ")
+  return cloneCls.join(" ")
 }
 
-export const setStaticClass = (...classes: (string | undefined)[]) => {
-  return classes.filter((cls) => cls !== undefined).join(" ")
-}
+

@@ -1,4 +1,4 @@
-import { setDynamicClass, setStaticClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import { splitProps, type FlowComponent, type JSX } from "solid-js"
 import styles from "./form.module.scss"
 
@@ -12,10 +12,8 @@ export const Actions: FlowComponent<ActionsProps> = (props) => {
   return (
     <div
       {...restProps}
-      class={setDynamicClass({
-        statics: [restProps.class, styles.actions],
-        dynamics: [[styles._flexEnd]],
-        conditions: [!!splitedProps.flexEnd],
+      class={cls([restProps.class, styles.actions], {
+        [styles._flexEnd]: !!splitedProps.flexEnd,
       })}
     >
       {restProps.children}

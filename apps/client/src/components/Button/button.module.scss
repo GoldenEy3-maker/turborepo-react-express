@@ -1,5 +1,6 @@
 .button {
-  --_color: var(--primary-hsl);
+  --_clr: var(--primary-hsl);
+  --_bg-clr: transparent;
 
   position: relative;
   overflow: hidden;
@@ -8,7 +9,8 @@
   align-items: center;
   gap: 0.5rem;
 
-  color: hsla(var(--_color));
+  color: hsla(var(--_clr));
+  background-color: hsla(var(--_bg-clr));
 
   padding: 0.5rem 1.3rem;
 
@@ -17,7 +19,7 @@
   transition: 200ms ease;
 
   svg {
-    fill: hsla(var(--_color));
+    fill: hsla(var(--_clr));
   }
 
   &._icon {
@@ -25,28 +27,49 @@
   }
 
   &._elevated {
-    background-color: hsla(var(--primary-base-hsl), 70%, 0.15);
+    --_bg-clr: var(--primary-base-hsl), 70%, 0.15;
+
+    &._danger {
+      --_bg-clr: var(--danger-hsl), 0.15;
+    }
   }
 
   &._filled {
     --ripple-hsl: var(--background-hsl);
+    --_clr: var(--on-primary-hsl);
+    --_bg-clr: var(--primary-hsl);
 
-    --_color: var(--on-primary-hsl);
-
-    background-color: hsl(var(--primary-hsl));
+    &._danger {
+      --_clr: var(--on-danger-hsl);
+      --_bg-clr: var(--danger-hsl);
+    }
   }
 
   &[type="submit"] {
     gap: 0;
   }
 
+  &._danger {
+    --ripple-hsl: var(--danger-hsl);
+
+    --_clr: var(--danger-hsl);
+  }
+
   &:disabled {
-    --_color: var(--primary-hsl), 0.5;
+    --_clr: var(--primary-hsl), 0.5;
 
     cursor: not-allowed;
 
+    &._danger {
+      --_clr: var(--danger-hsl), 0.5;
+    }
+
     &._filled {
-      background-color: hsla(var(--primary-hsl), 0.6);
+      --_bg-clr: var(--primary-hsl), 0.6;
+
+      &._danger {
+        --_bg-clr: var(--danger-hsl), 0.6;
+      }
     }
 
     &[type="submit"] {
@@ -59,28 +82,53 @@
   }
 
   &:focus-visible {
+    --_bg-clr: var(--primary-hsl), 0.1;
+
     outline: none;
-    background-color: hsla(var(--primary-hsl), 0.1);
+
+    &._danger {
+      --_bg-clr: var(--danger-hsl), 0.1;
+    }
 
     &._filled {
-      background-color: hsl(var(--primary-base-hsl), 75%);
+      --_bg-clr: var(--primary-base-hsl), 75%;
+
+      &._danger {
+        --_bg-clr: var(--danger-base-hsl), 75%;
+      }
     }
 
     &._elevated {
-      background-color: hsla(var(--primary-base-hsl), 70%, 0.2);
+      --_bg-clr: var(--primary-base-hsl), 70%, 0.2;
+
+      &._danger {
+        --_bg-clr: var(--danger-hsl), 0.2;
+      }
     }
   }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover:not(:disabled) {
-      background-color: hsla(var(--primary-hsl), 0.1);
+      --_bg-clr: var(--primary-hsl), 0.1;
+
+      &._danger {
+        --_bg-clr: var(--danger-hsl), 0.1;
+      }
 
       &._filled {
-        background-color: hsl(var(--primary-base-hsl), 75%);
+        --_bg-clr: var(--primary-base-hsl), 75%;
+
+        &._danger {
+          --_bg-clr: var(--danger-base-hsl), 75%;
+        }
       }
 
       &._elevated {
-        background-color: hsla(var(--primary-base-hsl), 70%, 0.25);
+        --_bg-clr: var(--primary-base-hsl), 70%, 0.25;
+
+        &._danger {
+          --_bg-clr: var(--danger-hsl), 0.25;
+        }
       }
     }
   }

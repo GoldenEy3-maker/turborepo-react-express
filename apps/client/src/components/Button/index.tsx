@@ -1,5 +1,5 @@
 import { useRippleEffect } from "@/hooks/rippleEffect"
-import { setDynamicClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import { splitProps, type FlowComponent, type JSX } from "solid-js"
 import styles from "./button.module.scss"
 
@@ -21,14 +21,11 @@ const Button: FlowComponent<ButtonProps> = (props) => {
   return (
     <button
       {...restProps}
-      class={setDynamicClass({
-        statics: [restProps.class, styles.button],
-        dynamics: [[styles._filled], [styles._elevated], [styles._icon]],
-        conditions: [
-          splitedProps.variant === "filled",
-          splitedProps.variant === "elevated",
-          !!splitedProps.isIcon,
-        ],
+      class={cls([restProps.class, styles.button], {
+        [styles._filled]: splitedProps.variant === "filled",
+        [styles._elevated]: splitedProps.variant === "elevated",
+        [styles._danger]: !!splitedProps.isDanger,
+        [styles._icon]: !!splitedProps.isIcon,
       })}
       onPointerDown={rippleEffectEvent}
     >

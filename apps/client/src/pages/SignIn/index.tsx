@@ -4,7 +4,7 @@ import Input from "@/components/Input"
 import Logo from "@/components/Logo"
 import { useResponseMessage } from "@/hooks/responseMessage"
 import { RouterPaths } from "@/utils/enums"
-import { setStaticClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import { trpc } from "@/utils/trpc"
 import { A, useNavigate } from "@solidjs/router"
 import type { Errors } from "solid-form-action"
@@ -95,9 +95,7 @@ const SignInPage: Component = () => {
   return (
     <>
       <Logo isMinimized={true} />
-      <h1 class={setStaticClass(styles.title, "page-title _centered")}>
-        Авторизация
-      </h1>
+      <h1 class={cls([styles.title, "page-title _centered"])}>Авторизация</h1>
       <Form.Root ref={(ref) => form(ref)}>
         <Form.Inputs>
           <Input

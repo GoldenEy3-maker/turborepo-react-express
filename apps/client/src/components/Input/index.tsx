@@ -1,4 +1,4 @@
-import { setDynamicClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import {
   Show,
   createEffect,
@@ -14,6 +14,7 @@ type InputProps = {
   leadingIcon?: JSX.Element
   trailingIcon?: JSX.Element
   validError?: string | string[]
+  isMaskPatter?: boolean
 } & JSX.InputHTMLAttributes<HTMLInputElement>
 
 const Input: Component<InputProps> = (props) => {
@@ -23,6 +24,7 @@ const Input: Component<InputProps> = (props) => {
     "label",
     "class",
     "validError",
+    "isMaskPatter",
   ])
 
   const [isActive, setIsActive] = createSignal(false)
@@ -36,29 +38,24 @@ const Input: Component<InputProps> = (props) => {
 
   return (
     <div
-      class={setDynamicClass({
-        statics: [splitedProps.class, styles.customInput],
-        dynamics: [
-          [styles._active],
-          [styles._withLeading],
-          [styles._withTrailing],
-          [styles._disabled],
-          [styles._notValid],
-        ],
-        conditions: [
-          isActive(),
-          !!splitedProps.leadingIcon,
-          !!splitedProps.trailingIcon,
-          !!restProps.disabled,
-          !!splitedProps.validError,
-        ],
+      class={cls([splitedProps.class, styles.customInput], {
+        [styles._active]: isActive(),
+        [styles._withLeading]: !!splitedProps.leadingIcon,
+        [styles._withTrailing]: !!splitedProps.trailingIcon,
+        [styles._disabled]: !!restProps.disabled,
+        [styles._notValid]: !!splitedProps.validError,
       })}
     >
       <div class={styles.wrapper}>
         <Show when={splitedProps.leadingIcon}>
           {(icon) => <div class={styles.leading}>{icon()}</div>}
         </Show>
-        <label for={restProps.id}>{splitedProps.label}</label>
+        <label class={styles.label} for={restProps.id}>
+          {splitedProps.label}
+        </label>
+        <Show when={splitedProps.isMaskPatter}>
+          <label class={styles.maskPatter} for={restProps.id} />
+        </Show>
         <input
           {...restProps}
           onFocus={() => {

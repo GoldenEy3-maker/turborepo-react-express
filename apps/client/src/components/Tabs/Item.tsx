@@ -1,5 +1,5 @@
 import { useRippleEffect } from "@/hooks/rippleEffect"
-import { setDynamicClass, setStaticClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import { createEffect, splitProps, type Component, type JSX } from "solid-js"
 import { useTabsContext } from "./context"
 import styles from "./tabs.module.scss"
@@ -28,10 +28,8 @@ export const Item: Component<ItemProps> = (props) => {
 
   return (
     <div
-      class={setDynamicClass({
-        statics: [restProps.class, styles.item],
-        dynamics: [[styles._active]],
-        conditions: [!!restProps.checked],
+      class={cls([restProps.class, styles.item], {
+        [styles._active]: !!restProps.checked,
       })}
     >
       <label for={restProps.id} onPointerDown={rippleEffectEvent} ref={itemRef}>

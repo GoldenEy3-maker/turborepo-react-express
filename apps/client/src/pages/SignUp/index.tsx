@@ -6,7 +6,10 @@ import * as Tabs from "@/components/Tabs"
 import { useResponseMessage } from "@/hooks/responseMessage"
 import { InputMaskPatterns, PageQueryKeys, RouterPaths } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
-import { createInputMask } from "@solid-primitives/input-mask"
+import {
+  createInputMask,
+  createMaskPattern,
+} from "@solid-primitives/input-mask"
 import { A, useLocation } from "@solidjs/router"
 import type { Errors } from "solid-form-action"
 import { createFormActions } from "solid-form-action"
@@ -255,7 +258,11 @@ const SignUpPage: Component = () => {
             value={formState.birthDate}
             validError={validErrors.birthDate}
             placeholder="ДД.ММ.ГГГГ"
-            onInput={createInputMask(InputMaskPatterns.Date)}
+            isMaskPatter
+            onInput={createMaskPattern(
+              createInputMask(InputMaskPatterns.Date),
+              () => "ДД.ММ.ГГГГ"
+            )}
             disabled={signUpMut.isPending}
           />
 

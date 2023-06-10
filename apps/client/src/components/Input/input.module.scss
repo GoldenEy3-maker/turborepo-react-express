@@ -8,7 +8,7 @@
   --_add-inline-padding: 0.3rem;
   --_padding-bottom: 0.6rem;
 
-  label {
+  .label {
     position: absolute;
     top: calc((var(--_padding-top) + var(--_padding-bottom)) / 2);
     left: var(--_padding-left);
@@ -22,6 +22,22 @@
     font-size: var(--body-l-fs);
 
     transition: 200ms ease;
+  }
+
+  .maskPatter[data-mask-value] {
+    position: absolute;
+    top: var(--_padding-top);
+    left: var(--_padding-left);
+  }
+
+  .maskPatter[data-mask-value]::before {
+    content: attr(data-mask-value);
+    color: transparent;
+  }
+
+  .maskPatter[data-mask-pattern]::after {
+    content: attr(data-mask-pattern);
+    color: hsla(var(--on-background-hsl), 0.5);
   }
 
   input {
@@ -55,7 +71,7 @@
   }
 
   &._active {
-    label {
+    .label {
       top: 0.4rem;
       font-size: var(--body-s-fs);
       color: hsla(var(--on-background-hsl), 0.7);
@@ -81,7 +97,7 @@
       cursor: not-allowed;
     }
 
-    label {
+    .label {
       color: hsl(var(--on-background-hsl), 0.5);
     }
 
@@ -95,7 +111,7 @@
       border-color: hsl(var(--danger-hsl));
     }
 
-    label {
+    .label {
       color: hsl(var(--danger-hsl));
     }
   }
@@ -105,7 +121,7 @@
       border-color: hsl(var(--primary-hsl));
     }
 
-    label {
+    .label {
       color: hsl(var(--primary-hsl));
     }
   }

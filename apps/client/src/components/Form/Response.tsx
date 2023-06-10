@@ -1,4 +1,4 @@
-import { setDynamicClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import { splitProps, type FlowComponent, type JSX } from "solid-js"
 import styles from "./form.module.scss"
 
@@ -16,18 +16,10 @@ export const Response: FlowComponent<ResponseProps> = (props) => {
     <div
       {...restProps}
       aria-hidden={!splitedProps.state}
-      class={setDynamicClass({
-        statics: [restProps.class, styles.response],
-        dynamics: [
-          [styles._dangerMessage],
-          [styles._successMessage],
-          [styles._warningMessage],
-        ],
-        conditions: [
-          splitedProps.type === "danger",
-          splitedProps.type === "success",
-          splitedProps.type === "warning",
-        ],
+      class={cls([restProps.class, styles.response], {
+        [styles._dangerMessage]: splitedProps.type === "danger",
+        [styles._successMessage]: splitedProps.type === "success",
+        [styles._warningMessage]: splitedProps.type === "warning",
       })}
     >
       <div class={styles.responseMessage}>{restProps.children}</div>

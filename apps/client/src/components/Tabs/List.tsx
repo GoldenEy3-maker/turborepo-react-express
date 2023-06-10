@@ -1,4 +1,4 @@
-import { setStaticClass } from "@/utils/helpers"
+import { cls } from "@/utils/helpers"
 import { type FlowComponent, type JSX } from "solid-js"
 import { useTabsContext } from "./context"
 import styles from "./tabs.module.scss"
@@ -9,7 +9,7 @@ export const List: FlowComponent<JSX.HTMLAttributes<HTMLDivElement>> = (
   const [context] = useTabsContext()
 
   return (
-    <div {...props} class={setStaticClass(props.class, styles.list)}>
+    <div {...props} class={cls([props.class, styles.list])}>
       <div class={styles.listContainer}>{props.children}</div>
       <div
         class={styles.line}

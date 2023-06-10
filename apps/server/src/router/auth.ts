@@ -8,7 +8,11 @@ import { publicProcedure, router } from "../trpc"
 import { validateRequiredFields } from "../utils/validate"
 
 export const authRouter = router({
-
+  signOut: publicProcedure.mutation(({ ctx: { res } }) => {
+    res.cookie(CookieKeys.AuthToken, "", {
+      maxAge: -1
+    })
+  }),
   signIn: publicProcedure.input(z.object({
     login: z.string(),
     password: z.string()
