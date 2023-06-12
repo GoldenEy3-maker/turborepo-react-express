@@ -5,6 +5,10 @@
 
   font-size: var(--display-s-fs);
 
+  span {
+    flex-shrink: 0;
+  }
+
   b {
     color: hsl(var(--primary-hsl));
   }

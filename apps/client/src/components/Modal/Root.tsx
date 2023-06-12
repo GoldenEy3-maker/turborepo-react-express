@@ -1,27 +1,30 @@
 import { cls } from "@/utils/helpers"
-import { splitProps, type FlowComponent, type JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./modal.module.scss"
 
 type RootProps = {
   closeHandler?: () => void
-} & JSX.HTMLAttributes<HTMLDivElement>
+} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
-export const Root: FlowComponent<RootProps> = (props) => {
-  const [splitedProps, restProps] = splitProps(props, ["closeHandler"])
-
+export const Root: FC<RootProps> = ({
+  closeHandler,
+  className,
+  children,
+  ...props
+}) => {
   return (
     <div
-      {...restProps}
-      class={cls([restProps.class, styles.root])}
+      className={cls([className, styles.root])}
       onPointerDown={(e) => {
         if (
-          !e.target.closest("[data-modal-prevent]") &&
-          splitedProps.closeHandler
+          !(e.target as HTMLElement).closest("[data-modal-prevent]") &&
+          closeHandler
         )
-          splitedProps.closeHandler()
+          closeHandler()
       }}
+      {...props}
     >
-      {restProps.children}
+      {children}
     </div>
   )
 }

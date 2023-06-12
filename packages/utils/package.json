@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
-  "devDependencies": {},
   "scripts": {
     "build": "tsc"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "js-cookie": "^3.0.5"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.3"
+  }
 }

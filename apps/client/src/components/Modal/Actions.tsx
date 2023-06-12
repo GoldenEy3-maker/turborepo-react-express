@@ -1,13 +1,13 @@
 import { cls } from "@/utils/helpers"
-import type { FlowComponent, JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./modal.module.scss"
 
-export const Actions: FlowComponent<JSX.HTMLAttributes<HTMLDivElement>> = (
-  props
-) => {
+export const Actions: FC<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+> = ({ className, children, ...props }) => {
   return (
-    <div {...props} class={cls([props.class, styles.actions])}>
-      {props.children}
+    <div className={cls([className, styles.actions])} {...props}>
+      {children}
     </div>
   )
 }

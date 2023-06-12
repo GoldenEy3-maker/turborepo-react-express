@@ -1,12 +1,12 @@
-import { Outlet } from "@solidjs/router"
-import type { Component } from "solid-js"
+import { FC } from "react"
+import { Outlet } from "react-router-dom"
 import styles from "./authLayout.module.scss"
 
-const AuthLayout: Component = () => {
+const AuthLayout: FC = () => {
   return (
-    <div class="_container">
-      <main class={styles.page}>
-        <div class={styles.wrapper}>
+    <div className="_container">
+      <main className={styles.page}>
+        <div className={styles.wrapper}>
           <Outlet />
         </div>
       </main>

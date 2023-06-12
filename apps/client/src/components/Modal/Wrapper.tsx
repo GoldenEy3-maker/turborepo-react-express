@@ -1,17 +1,17 @@
 import { cls } from "@/utils/helpers"
-import { type FlowComponent, type JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./modal.module.scss"
 
-export const Wrapper: FlowComponent<JSX.HTMLAttributes<HTMLDivElement>> = (
-  props
-) => {
+export const Wrapper: FC<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+> = ({ className, children, ...props }) => {
   return (
     <div
-      {...props}
       data-modal-prevent
-      class={cls([props.class, styles.wrapper])}
+      className={cls([className, styles.wrapper])}
+      {...props}
     >
-      {props.children}
+      {children}
     </div>
   )
 }

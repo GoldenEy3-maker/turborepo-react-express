@@ -1,4 +1,4 @@
-import create from "solid-zustand"
+import { create } from "zustand"
 
 type SignOutModalStore = {
   state: boolean

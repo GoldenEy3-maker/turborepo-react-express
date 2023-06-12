@@ -1,41 +1,49 @@
 import { useRippleEffect } from "@/hooks/rippleEffect"
 import { cls } from "@/utils/helpers"
-import { createEffect, splitProps, type Component, type JSX } from "solid-js"
+import type { DetailedHTMLProps, InputHTMLAttributes } from "react"
+import { forwardRef, useEffect, useRef } from "react"
 import { useTabsContext } from "./context"
 import styles from "./tabs.module.scss"
 
 type ItemProps = {
   label: string
-} & Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type">
+} & Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  "type"
+>
 
-export const Item: Component<ItemProps> = (props) => {
-  const [splitedProps, restProps] = splitProps(props, ["label"])
+export const Item = forwardRef<HTMLInputElement, ItemProps>(
+  ({ className, label, ...props }, ref) => {
+    const itemRef = useRef<HTMLLabelElement>(null)
 
-  let itemRef: HTMLLabelElement | undefined
+    const [, setContext] = useTabsContext()
 
-  const [context, setContext] = useTabsContext()
+    const rippleEffectEvent = useRippleEffect()
 
-  const rippleEffectEvent = useRippleEffect()
+    useEffect(() => {
+      if (props.checked && itemRef.current) {
+        setContext({
+          activeWidth: itemRef.current.offsetWidth,
+          activeOffset: itemRef.current.offsetLeft,
+        })
+      }
+    }, [props.checked, setContext])
 
-  createEffect(() => {
-    if (restProps.checked && itemRef) {
-      setContext({
-        activeWidth: itemRef.offsetWidth,
-        activeOffset: itemRef.offsetLeft,
-      })
-    }
-  })
-
-  return (
-    <div
-      class={cls([restProps.class, styles.item], {
-        [styles._active]: !!restProps.checked,
-      })}
-    >
-      <label for={restProps.id} onPointerDown={rippleEffectEvent} ref={itemRef}>
-        {splitedProps.label}
-      </label>
-      <input {...restProps} type="radio" />
-    </div>
-  )
-}
+    return (
+      <div
+        className={cls([className, styles.item], {
+          [styles._active]: !!props.checked,
+        })}
+      >
+        <label
+          htmlFor={props.id}
+          onPointerDown={rippleEffectEvent}
+          ref={itemRef}
+        >
+          {label}
+        </label>
+        <input type="radio" ref={ref} {...props} />
+      </div>
+    )
+  }
+)

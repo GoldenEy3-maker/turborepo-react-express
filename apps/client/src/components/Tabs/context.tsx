@@ -1,27 +1,28 @@
-import type { FlowComponent } from "solid-js"
-import { createContext, useContext } from "solid-js"
-import type { SetStoreFunction } from "solid-js/store"
-import { createStore } from "solid-js/store"
+import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
+import { createContext, useContext, useState } from "react"
 
-type TabsContextStore = {
+type TabsContextState = {
   activeWidth: number
   activeOffset: number
 }
 
-type TabsContext = [TabsContextStore, SetStoreFunction<TabsContextStore>]
+type TabsContext = [
+  TabsContextState,
+  Dispatch<SetStateAction<TabsContextState>>
+]
 
-const TabsContext = createContext<TabsContext>()
+const TabsContext = createContext<TabsContext | undefined>(undefined)
 
-export const TabsContextProvider: FlowComponent = (props) => {
-  const contextStore = createStore<TabsContextStore>({
+export const TabsContextProvider: FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const contextStore = useState<TabsContextState>({
     activeOffset: 0,
     activeWidth: 0,
   })
 
   return (
-    <TabsContext.Provider value={contextStore}>
-      {props.children}
-    </TabsContext.Provider>
+    <TabsContext.Provider value={contextStore}>{children}</TabsContext.Provider>
   )
 }
 

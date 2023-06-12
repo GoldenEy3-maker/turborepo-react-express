@@ -1,10 +1,10 @@
-import type { JSX } from "solid-js"
+import type { PointerEventHandler } from "react"
 
 export const useRippleEffect = () => {
   const animationDuration = 600
   const minAnimationDuration = 200
 
-  const rippleEffectEvent: JSX.EventHandler<HTMLElement, PointerEvent> = (event) => {
+  const rippleEffectEvent: PointerEventHandler<HTMLElement> = (event) => {
     const target = event.currentTarget
     const nestedInteractionNodes = target.querySelectorAll("button, input, a")
 

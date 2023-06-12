@@ -1,13 +1,13 @@
-import type { Component } from "solid-js"
+import { FC } from "react"
 import Button from "../Button"
 
 type CloseProps = {
   handler: () => void
 }
 
-export const Close: Component<CloseProps> = (props) => {
+export const Close: FC<CloseProps> = ({ handler }) => {
   return (
-    <Button isIcon onClick={props.handler}>
+    <Button isIcon onClick={handler}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"

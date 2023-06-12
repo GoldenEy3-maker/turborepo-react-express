@@ -1,22 +1,25 @@
 import { cls } from "@/utils/helpers"
-import { splitProps, type FlowComponent, type JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./form.module.scss"
 
 type ActionsProps = {
   flexEnd?: boolean
-} & JSX.HTMLAttributes<HTMLDivElement>
+} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
-export const Actions: FlowComponent<ActionsProps> = (props) => {
-  const [splitedProps, restProps] = splitProps(props, ["flexEnd"])
-
+export const Actions: FC<ActionsProps> = ({
+  className,
+  children,
+  flexEnd,
+  ...props
+}) => {
   return (
     <div
-      {...restProps}
-      class={cls([restProps.class, styles.actions], {
-        [styles._flexEnd]: !!splitedProps.flexEnd,
+      className={cls([className, styles.actions], {
+        [styles._flexEnd]: !!flexEnd,
       })}
+      {...props}
     >
-      {restProps.children}
+      {children}
     </div>
   )
 }

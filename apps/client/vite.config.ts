@@ -1,13 +1,14 @@
+import react from '@vitejs/plugin-react'
 import path from 'path'
 import { defineConfig } from 'vite'
-import solidPlugin from 'vite-plugin-solid'
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
+      "@": path.resolve(__dirname, './src')
+    }
   },
   appType: "mpa",
   server: {
@@ -19,8 +20,5 @@ export default defineConfig({
         changeOrigin: true,
       }
     }
-  },
-  build: {
-    target: 'esnext',
-  },
+  }
 })

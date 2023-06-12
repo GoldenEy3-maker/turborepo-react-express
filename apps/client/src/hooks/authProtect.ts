@@ -1,5 +1,6 @@
 import { RouterPaths } from "@/utils/enums"
-import { useNavigate } from "@solidjs/router"
+import { useEffect } from 'react'
+import { useNavigate } from "react-router-dom"
 import { getCookieObject } from "utils"
 import { CookieKeys } from "utils/enums"
 import type { AuthCookie } from "utils/types"
@@ -8,5 +9,7 @@ export const useAuthProtect = () => {
   const navigate = useNavigate()
   const authCookie = getCookieObject<AuthCookie>(CookieKeys.AuthToken)
 
-  if (!authCookie) navigate(RouterPaths.SignInPage, { replace: true })
+  useEffect(() => {
+    if (!authCookie) navigate(RouterPaths.SignInPage, { replace: true })
+  }, [authCookie, navigate])
 }

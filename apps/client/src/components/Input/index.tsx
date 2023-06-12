@@ -1,12 +1,6 @@
 import { cls } from "@/utils/helpers"
-import {
-  Show,
-  createEffect,
-  createSignal,
-  splitProps,
-  type Component,
-  type JSX,
-} from "solid-js"
+import type { DetailedHTMLProps, InputHTMLAttributes } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import styles from "./input.module.scss"
 
 type InputProps = {
@@ -14,70 +8,74 @@ type InputProps = {
   leadingIcon?: JSX.Element
   trailingIcon?: JSX.Element
   validError?: string | string[]
-  isMaskPatter?: boolean
-} & JSX.InputHTMLAttributes<HTMLInputElement>
+} & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-const Input: Component<InputProps> = (props) => {
-  const [splitedProps, restProps] = splitProps(props, [
-    "leadingIcon",
-    "trailingIcon",
-    "label",
-    "class",
-    "validError",
-    "isMaskPatter",
-  ])
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      label,
+      leadingIcon,
+      trailingIcon,
+      validError,
+      onFocus,
+      onBlur,
+      ...props
+    },
+    ref
+  ) => {
+    const [isActive, setIsActive] = useState(false)
+    const [isFocus, setIsFocus] = useState(false)
 
-  const [isActive, setIsActive] = createSignal(false)
-  const [isFocus, setIsFocus] = createSignal(false)
+    useEffect(() => {
+      if (!isFocus) {
+        setIsActive(!!props.value)
+      }
+    }, [isFocus, props.value])
 
-  createEffect(() => {
-    if (!isFocus()) {
-      setIsActive(!!restProps.value)
-    }
-  })
+    return (
+      <div
+        className={cls([className, styles.customInput], {
+          [styles._active]: isActive,
+          [styles._withLeading]: !!leadingIcon,
+          [styles._withTrailing]: !!trailingIcon,
+          [styles._disabled]: !!props.disabled,
+          [styles._notValid]: !!validError,
+        })}
+      >
+        <div className={styles.wrapper}>
+          {leadingIcon ? (
+            <div className={styles.leading}>{leadingIcon}</div>
+          ) : null}
+          <label htmlFor={props.id}>{label}</label>
 
-  return (
-    <div
-      class={cls([splitedProps.class, styles.customInput], {
-        [styles._active]: isActive(),
-        [styles._withLeading]: !!splitedProps.leadingIcon,
-        [styles._withTrailing]: !!splitedProps.trailingIcon,
-        [styles._disabled]: !!restProps.disabled,
-        [styles._notValid]: !!splitedProps.validError,
-      })}
-    >
-      <div class={styles.wrapper}>
-        <Show when={splitedProps.leadingIcon}>
-          {(icon) => <div class={styles.leading}>{icon()}</div>}
-        </Show>
-        <label class={styles.label} for={restProps.id}>
-          {splitedProps.label}
-        </label>
-        <Show when={splitedProps.isMaskPatter}>
-          <label class={styles.maskPatter} for={restProps.id} />
-        </Show>
-        <input
-          {...restProps}
-          onFocus={() => {
-            setIsActive(true)
-            setIsFocus(true)
-          }}
-          onBlur={() => {
-            if (!restProps.value) setIsActive(false)
+          <input
+            onFocus={(event) => {
+              setIsActive(true)
+              setIsFocus(true)
 
-            setIsFocus(false)
-          }}
-        />
-        <Show when={splitedProps.trailingIcon}>
-          {(icon) => <div class={styles.trailing}>{icon()}</div>}
-        </Show>
+              if (onFocus) onFocus(event)
+            }}
+            onBlur={(event) => {
+              if (!props.value) setIsActive(false)
+
+              setIsFocus(false)
+
+              if (onBlur) onBlur(event)
+            }}
+            ref={ref}
+            {...props}
+          />
+          {trailingIcon ? (
+            <div className={styles.trailing}>{trailingIcon}</div>
+          ) : null}
+        </div>
+        <div className={styles.errorMessage}>
+          <p>{validError}</p>
+        </div>
       </div>
-
-      <div class={styles.errorMessage}>
-        <p>{splitedProps.validError}</p>
-      </div>
-    </div>
-  )
-}
+    )
+  }
+)
 
 export default Input

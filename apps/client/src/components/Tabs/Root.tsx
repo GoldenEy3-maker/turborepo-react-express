@@ -1,15 +1,15 @@
 import { cls } from "@/utils/helpers"
-import type { FlowComponent, JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import { TabsContextProvider } from "./context"
 import styles from "./tabs.module.scss"
 
-export const Root: FlowComponent<JSX.HTMLAttributes<HTMLDivElement>> = (
-  props
-) => {
+export const Root: FC<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+> = ({ className, children, ...props }) => {
   return (
     <TabsContextProvider>
-      <div {...props} class={cls([props.class, styles.root])}>
-        {props.children}
+      <div className={cls([className, styles.root])} {...props}>
+        {children}
       </div>
     </TabsContextProvider>
   )

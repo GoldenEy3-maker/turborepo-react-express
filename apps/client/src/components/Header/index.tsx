@@ -1,10 +1,10 @@
-import type { Component } from "solid-js"
+import { FC } from "react"
 import { getCookieObject } from "utils"
 import { CookieKeys } from "utils/enums"
 import type { AuthCookie } from "utils/types"
 import styles from "./header.module.scss"
 
-const Header: Component = () => {
+const Header: FC = () => {
   const authCookie = getCookieObject<AuthCookie>(CookieKeys.AuthToken)
 
   const getGreetings = () => {
@@ -22,10 +22,10 @@ const Header: Component = () => {
   }
 
   return (
-    <header class={styles.header}>
-      <h1 class="page-title">
-        {getGreetings()}, <span class="rich-text">{authCookie?.firstName}</span>
-        !
+    <header className={styles.header}>
+      <h1 className="page-title">
+        {getGreetings()},{" "}
+        <span className="rich-text">{authCookie?.firstName}</span>!
       </h1>
     </header>
   )

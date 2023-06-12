@@ -1,22 +1,25 @@
 import { cls } from "@/utils/helpers"
-import { splitProps, type FlowComponent, type JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./modal.module.scss"
 
 type HeaderProps = {
   spaceBetween?: boolean
-} & JSX.HTMLAttributes<HTMLElement>
+} & DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
 
-export const Header: FlowComponent<HeaderProps> = (props) => {
-  const [splitedProps, restProps] = splitProps(props, ["spaceBetween"])
-
+export const Header: FC<HeaderProps> = ({
+  spaceBetween,
+  className,
+  children,
+  ...props
+}) => {
   return (
     <header
-      {...restProps}
-      class={cls([restProps.class, styles.header], {
-        [styles._spaceBetween]: !!splitedProps.spaceBetween,
+      className={cls([className, styles.header], {
+        [styles._spaceBetween]: !!spaceBetween,
       })}
+      {...props}
     >
-      {restProps.children}
+      {children}
     </header>
   )
 }

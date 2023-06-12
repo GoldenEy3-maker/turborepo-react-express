@@ -9,7 +9,7 @@
     "@turbo/gen": "^1.9.7",
     "turbo": "^1.10.3"
   },
-  "name": "solid-express",
+  "name": "turborepo-react-express",
   "packageManager": "npm@9.5.1",
   "workspaces": [
     "apps/*",

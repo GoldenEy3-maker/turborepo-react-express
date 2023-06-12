@@ -1,13 +1,13 @@
 import { cls } from "@/utils/helpers"
-import type { FlowComponent, JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./form.module.scss"
 
-export const Inputs: FlowComponent<JSX.HTMLAttributes<HTMLDivElement>> = (
-  props
-) => {
+export const Inputs: FC<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+> = ({ className, children, ...props }) => {
   return (
-    <div {...props} class={cls([props.class, styles.inputs])}>
-      {props.children}
+    <div className={cls([className, styles.inputs])} {...props}>
+      {children}
     </div>
   )
 }

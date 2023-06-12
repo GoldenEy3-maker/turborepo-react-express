@@ -1,36 +1,46 @@
 import { useRippleEffect } from "@/hooks/rippleEffect"
 import { cls } from "@/utils/helpers"
-import { splitProps, type FlowComponent, type JSX } from "solid-js"
+import { ButtonHTMLAttributes, DetailedHTMLProps, FC, ReactNode } from "react"
 import styles from "./button.module.scss"
 
 type ButtonProps = {
   variant?: "elevated" | "filled"
   isDanger?: boolean
   isIcon?: boolean
-} & JSX.ButtonHTMLAttributes<HTMLButtonElement>
+  children?: ReactNode
+} & DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>
 
-const Button: FlowComponent<ButtonProps> = (props) => {
-  const [splitedProps, restProps] = splitProps(props, [
-    "variant",
-    "isDanger",
-    "isIcon",
-  ])
-
+const Button: FC<ButtonProps> = ({
+  children,
+  className,
+  onPointerDown,
+  variant,
+  isDanger,
+  isIcon,
+  ...props
+}) => {
   const rippleEffectEvent = useRippleEffect()
 
   return (
     <button
-      {...restProps}
-      class={cls([restProps.class, styles.button], {
-        [styles._filled]: splitedProps.variant === "filled",
-        [styles._elevated]: splitedProps.variant === "elevated",
-        [styles._danger]: !!splitedProps.isDanger,
-        [styles._icon]: !!splitedProps.isIcon,
+      className={cls([className, styles.button], {
+        [styles._filled]: variant === "filled",
+        [styles._elevated]: variant === "elevated",
+        [styles._danger]: !!isDanger,
+        [styles._icon]: !!isIcon,
       })}
-      onPointerDown={rippleEffectEvent}
+      onPointerDown={(event) => {
+        rippleEffectEvent(event)
+
+        if (onPointerDown) onPointerDown(event)
+      }}
+      {...props}
     >
-      {restProps.type === "submit" ? (
-        <div class={styles.loader}>
+      {props.type === "submit" ? (
+        <div className={styles.loader}>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +53,7 @@ const Button: FlowComponent<ButtonProps> = (props) => {
           </span>
         </div>
       ) : null}
-      {restProps.children}
+      {children}
     </button>
   )
 }

@@ -1,5 +1,5 @@
 import { cls } from "@/utils/helpers"
-import { splitProps, type FlowComponent, type JSX } from "solid-js"
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./form.module.scss"
 
 export type ResponseMessageType = "danger" | "warning" | "success" | undefined
@@ -7,22 +7,26 @@ export type ResponseMessageType = "danger" | "warning" | "success" | undefined
 type ResponseProps = {
   state: boolean
   type: ResponseMessageType
-} & JSX.HTMLAttributes<HTMLDivElement>
+} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
-export const Response: FlowComponent<ResponseProps> = (props) => {
-  const [splitedProps, restProps] = splitProps(props, ["state", "type"])
-
+export const Response: FC<ResponseProps> = ({
+  className,
+  children,
+  state,
+  type,
+  ...props
+}) => {
   return (
     <div
-      {...restProps}
-      aria-hidden={!splitedProps.state}
-      class={cls([restProps.class, styles.response], {
-        [styles._dangerMessage]: splitedProps.type === "danger",
-        [styles._successMessage]: splitedProps.type === "success",
-        [styles._warningMessage]: splitedProps.type === "warning",
+      className={cls([className, styles.response], {
+        [styles._dangerMessage]: type === "danger",
+        [styles._successMessage]: type === "success",
+        [styles._warningMessage]: type === "warning",
       })}
+      aria-hidden={!state}
+      {...props}
     >
-      <div class={styles.responseMessage}>{restProps.children}</div>
+      <div className={styles.responseMessage}>{children}</div>
     </div>
   )
 }

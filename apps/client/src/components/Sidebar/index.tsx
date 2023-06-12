@@ -2,8 +2,8 @@ import { useModal } from "@/hooks/modal"
 import { useRippleEffect } from "@/hooks/rippleEffect"
 import SignOutModal from "@/modals/SignOut"
 import { useSignOutModalStore } from "@/modals/SignOut/store"
-import { A } from "@solidjs/router"
-import type { Component } from "solid-js"
+import { FC } from "react"
+import { Link } from "react-router-dom"
 import { getCookieObject } from "utils"
 import { CookieKeys } from "utils/enums"
 import type { AuthCookie } from "utils/types"
@@ -11,7 +11,7 @@ import Button from "../Button"
 import Logo from "../Logo"
 import styles from "./sidebar.module.scss"
 
-const Sidebar: Component = () => {
+const Sidebar: FC = () => {
   const rippleEffectEvent = useRippleEffect()
   const [openModal] = useModal()
 
@@ -20,12 +20,12 @@ const Sidebar: Component = () => {
   return (
     <>
       <SignOutModal />
-      <aside class={styles.sidebar}>
+      <aside className={styles.sidebar}>
         <Logo />
-        <nav class={styles.nav}>
-          <ul class={styles.navList}>
-            <li class={styles.navItem}>
-              <A href="#" title="Главная" onPointerDown={rippleEffectEvent}>
+        <nav className={styles.nav}>
+          <ul className={styles.navList}>
+            <li className={styles.navItem}>
+              <Link to="#" title="Главная" onPointerDown={rippleEffectEvent}>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -37,10 +37,10 @@ const Sidebar: Component = () => {
                   </svg>
                 </span>
                 <span>Главная</span>
-              </A>
+              </Link>
             </li>
-            <li class={styles.navItem}>
-              <A href="#" title="Заказы" onPointerDown={rippleEffectEvent}>
+            <li className={styles.navItem}>
+              <Link to="#" title="Заказы" onPointerDown={rippleEffectEvent}>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -52,11 +52,11 @@ const Sidebar: Component = () => {
                   </svg>
                 </span>
                 <span>Заказы</span>
-              </A>
+              </Link>
             </li>
 
-            <li class={styles.navItem}>
-              <A href="#" title="Профиль" onPointerDown={rippleEffectEvent}>
+            <li className={styles.navItem}>
+              <Link to="#" title="Профиль" onPointerDown={rippleEffectEvent}>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -68,11 +68,11 @@ const Sidebar: Component = () => {
                   </svg>
                 </span>
                 <span>Профиль</span>
-              </A>
+              </Link>
             </li>
-            <hr class={styles.navDivider} />
-            <li class={styles.navItem}>
-              <A href="#" title="Резюме" onPointerDown={rippleEffectEvent}>
+            <hr className={styles.navDivider} />
+            <li className={styles.navItem}>
+              <Link to="#" title="Резюме" onPointerDown={rippleEffectEvent}>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -84,10 +84,14 @@ const Sidebar: Component = () => {
                   </svg>
                 </span>
                 <span>Резюме</span>
-              </A>
+              </Link>
             </li>
-            <li class={styles.navItem}>
-              <A href="#" title="Ваши заказы" onPointerDown={rippleEffectEvent}>
+            <li className={styles.navItem}>
+              <Link
+                to="#"
+                title="Ваши заказы"
+                onPointerDown={rippleEffectEvent}
+              >
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -99,16 +103,16 @@ const Sidebar: Component = () => {
                   </svg>
                 </span>
                 <span>Ваши заказы</span>
-              </A>
+              </Link>
             </li>
           </ul>
         </nav>
-        <div class={styles.profile}>
-          <div class={styles.profileWrapper}>
-            <div class={styles.profileImg}>
+        <div className={styles.profile}>
+          <div className={styles.profileWrapper}>
+            <div className={styles.profileImg}>
               <img src="/images/avatar-placeholder.png" alt="" />
             </div>
-            <span class={styles.profileName}>{authCookie?.firstName}</span>
+            <span className={styles.profileName}>{authCookie?.firstName}</span>
           </div>
 
           <Button

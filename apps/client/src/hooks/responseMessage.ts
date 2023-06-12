@@ -1,36 +1,40 @@
 import type { ResponseMessageType } from "@/components/Form/Response"
-import { createSignal } from "solid-js"
+import { useEffect, useRef, useState } from "react"
 
 export const useResponseMessage = () => {
-  let timerID: NodeJS.Timeout | null
+  const timerIDRef = useRef<NodeJS.Timeout>()
 
-  const [responseState, setResponseState] = createSignal(false)
-  const [responseMessage, setResponseMessage] = createSignal<string | undefined>(undefined)
-  const [responseType, setResponseType] = createSignal<ResponseMessageType>(undefined)
+  const [responseState, setResponseState] = useState(false)
+  const [responseMessage, setResponseMessage] = useState<string | undefined>(undefined)
+  const [responseType, setResponseType] = useState<ResponseMessageType>(undefined)
 
   const showResponseMessage = (message: string | undefined, type: ResponseMessageType = undefined, delay?: number) => {
     setResponseMessage(message)
     setResponseState(true)
     setResponseType(type)
 
-    if (timerID) {
-      clearTimeout(timerID)
-      timerID = null
+    if (timerIDRef.current) {
+      clearTimeout(timerIDRef.current)
+      timerIDRef.current = undefined
     }
 
-    timerID = setTimeout(() => {
+    timerIDRef.current = setTimeout(() => {
       setResponseState(false)
     }, delay ?? 4000)
   }
 
   const closeResponseMessage = () => {
-    if (timerID) {
-      clearTimeout(timerID)
-      timerID = null
+    if (timerIDRef.current) {
+      clearTimeout(timerIDRef.current)
+      timerIDRef.current = undefined
     }
 
     setResponseState(false)
   }
+
+  useEffect(() => {
+    return () => clearTimeout(timerIDRef.current)
+  }, [])
 
   return { responseMessage, responseState, responseType, showResponseMessage, closeResponseMessage }
 }

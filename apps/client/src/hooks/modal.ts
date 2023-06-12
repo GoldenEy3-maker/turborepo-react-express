@@ -1,4 +1,4 @@
-import { onCleanup, onMount } from "solid-js"
+import { useEffect } from "react"
 
 export const useModal = () => {
   const setScrollbarWidth = () => {
@@ -11,16 +11,6 @@ export const useModal = () => {
     callback()
   }
 
-  onMount(() => {
-    setScrollbarWidth()
-
-    window.addEventListener("resize", setScrollbarWidth)
-  })
-
-  onCleanup(() => {
-    window.removeEventListener("resize", setScrollbarWidth)
-  })
-
   const closeModal = (callback: () => void) => {
     callback()
 
@@ -28,6 +18,14 @@ export const useModal = () => {
       document.body.removeAttribute('data-lock')
     }, 200)
   }
+
+  useEffect(() => {
+    setScrollbarWidth()
+
+    window.addEventListener("resize", setScrollbarWidth)
+
+    return () => window.removeEventListener("resize", setScrollbarWidth)
+  }, [])
 
   return [openModal, closeModal]
 }
