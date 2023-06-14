@@ -15,7 +15,6 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        // target: "https://solid-express-api.vercel.app",
         target: process.env.SERVER_ORIGIN_URL ?? "http://localhost:9000",
         changeOrigin: true,
       }

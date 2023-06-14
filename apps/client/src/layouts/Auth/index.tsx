@@ -1,4 +1,4 @@
-import { FC } from "react"
+import type { FC } from "react"
 import { Outlet } from "react-router-dom"
 import styles from "./authLayout.module.scss"
 

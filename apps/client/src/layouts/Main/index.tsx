@@ -2,7 +2,7 @@ import Header from "@/components/Header"
 import Sidebar from "@/components/Sidebar"
 import { useAuthProtect } from "@/hooks/authProtect"
 import { cls } from "@/utils/helpers"
-import { FC } from "react"
+import type { FC } from "react"
 import { Outlet } from "react-router-dom"
 import styles from "./mainLayout.module.scss"
 
