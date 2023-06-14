@@ -37,6 +37,7 @@ const SignInPage: FC = () => {
 
   const redirectionTimerIDRef = useRef<NodeJS.Timeout>()
 
+  const queryTest = trpc.test.useQuery()
   const signInMut = trpc.auth.signIn.useMutation({
     onSuccess() {
       showResponseMessage(
@@ -68,6 +69,7 @@ const SignInPage: FC = () => {
 
   return (
     <>
+      {queryTest.data}
       <Logo isMinimized={true} />
       <h1 className={cls([styles.title, "page-title _centered"])}>
         Авторизация
