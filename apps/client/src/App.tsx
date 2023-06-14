@@ -8,6 +8,7 @@ import { trpc } from "./utils/trpc"
 const MainLayout = lazy(() => import("./layouts/Main"))
 const AuthLayout = lazy(() => import("./layouts/Auth"))
 const HomePage = lazy(() => import("./pages/Home"))
+const ProfilePage = lazy(() => import("./pages/Profile"))
 const SignInPage = lazy(() => import("./pages/SignIn"))
 const SignUpPage = lazy(() => import("./pages/SignUp"))
 
@@ -22,6 +23,10 @@ function App() {
             <Routes>
               <Route element={<MainLayout />}>
                 <Route index element={<HomePage />} />
+                <Route
+                  path={RouterPaths.ProfilePage}
+                  element={<ProfilePage />}
+                />
               </Route>
               <Route element={<AuthLayout />}>
                 <Route path={RouterPaths.SignInPage} element={<SignInPage />} />

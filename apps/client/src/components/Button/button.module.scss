@@ -40,6 +40,7 @@
     --_bg-clr: var(--primary-hsl);
 
     &._danger {
+      --ripple-hsl: var(--background-hsl);
       --_clr: var(--on-danger-hsl);
       --_bg-clr: var(--danger-hsl);
     }
@@ -65,10 +66,11 @@
     }
 
     &._filled {
-      --_bg-clr: var(--primary-hsl), 0.6;
+      --_clr: var(--on-primary-hsl), 0.8;
+      --_bg-clr: var(--primary-hsl), 0.7;
 
       &._danger {
-        --_bg-clr: var(--danger-hsl), 0.6;
+        --_bg-clr: var(--danger-hsl), 0.7;
       }
     }
 

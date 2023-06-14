@@ -10,5 +10,5 @@ export const validateTelPattern = (value: string) => {
 }
 
 export const validateDatePattern = (value: string) => {
-  return new RegExp(/^(0[1-9]|1\d|2\d|3[01])\.(0[1-9]|1[0-2])\.(19[3-9]\d|20\d{2})$/, "g").test(value)
+  return new RegExp(/^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-(19[3-9]\d|20\d{2})$/, "g").test(value)
 }

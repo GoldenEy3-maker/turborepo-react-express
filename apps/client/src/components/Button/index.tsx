@@ -1,6 +1,11 @@
 import { useRippleEffect } from "@/hooks/rippleEffect"
 import { cls } from "@/utils/helpers"
-import { ButtonHTMLAttributes, DetailedHTMLProps, FC, ReactNode } from "react"
+import type {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  FC,
+  ReactNode,
+} from "react"
 import styles from "./button.module.scss"
 
 type ButtonProps = {

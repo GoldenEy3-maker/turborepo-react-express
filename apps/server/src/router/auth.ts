@@ -62,7 +62,7 @@ export const authRouter = router({
     const hashedPassword = await bcrypt.hash(input.password, 10)
 
     const newUser = await prisma.user.create({
-      data: { ...input, password: hashedPassword, birthDate: new Date(input.birthDate), photo: "test.png" }
+      data: { ...input, password: hashedPassword, birthDate: new Date(input.birthDate) }
     })
 
     return { message: "Регистрация прошла успешно!", newUser }

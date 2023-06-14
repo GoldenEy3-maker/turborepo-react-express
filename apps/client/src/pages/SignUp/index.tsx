@@ -97,6 +97,7 @@ const SignUpPage: FC = () => {
     },
     mode: "onChange",
   })
+
   return (
     <>
       <Logo isMinimized={true} />
@@ -132,7 +133,7 @@ const SignUpPage: FC = () => {
               control={control}
               render={({ field: { value, ...props } }) => (
                 <Tabs.Item
-                  label="Работник"
+                  label="Исполнитель"
                   id={RoleTabKeys.PERFORMER}
                   value={RoleTabKeys.PERFORMER}
                   checked={value === RoleTabKeys.PERFORMER}
@@ -250,7 +251,7 @@ const SignUpPage: FC = () => {
             render={({ field }) => (
               <InputMask
                 mask={InputMaskPatterns.Date}
-                maskPlaceholder="ДД.ММ.ГГГГ"
+                maskPlaceholder="ДД-ММ-ГГГГ"
                 disabled={signUpMut.isLoading}
                 {...field}
               >

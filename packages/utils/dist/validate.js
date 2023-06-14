@@ -10,7 +10,7 @@ const validateTelPattern = (value) => {
 };
 exports.validateTelPattern = validateTelPattern;
 const validateDatePattern = (value) => {
-    return new RegExp(/^(0[1-9]|1\d|2\d|3[01])\.(0[1-9]|1[0-2])\.(19[3-9]\d|20\d{2})$/, "g").test(value);
+    return new RegExp(/^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-(19[3-9]\d|20\d{2})$/, "g").test(value);
 };
 exports.validateDatePattern = validateDatePattern;
 //# sourceMappingURL=validate.js.map

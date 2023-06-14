@@ -1,12 +1,22 @@
-import { trpc } from "@/utils/trpc"
-import type { FC } from "react"
+import { useState, type FC } from "react"
+import { createEditor } from "slate"
+import { Editable, Slate, withReact } from "slate-react"
+
+const initialValue = [
+  {
+    type: "paragraph",
+    children: [{ text: "A line of text in a paragraph." }],
+  },
+]
 
 const HomePage: FC = () => {
-  const { data, isFetching, isLoading, error } = trpc.test.useQuery()
+  const [editor] = useState(() => withReact(createEditor()))
 
   return (
     <main className="home">
-      {isLoading || isFetching ? "Loading..." : error ? error.message : data}
+      <Slate editor={editor} initialValue={initialValue}>
+        <Editable />
+      </Slate>
     </main>
   )
 }

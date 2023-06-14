@@ -2,7 +2,8 @@ import { useModal } from "@/hooks/modal"
 import { useRippleEffect } from "@/hooks/rippleEffect"
 import SignOutModal from "@/modals/SignOut"
 import { useSignOutModalStore } from "@/modals/SignOut/store"
-import { FC } from "react"
+import { RouterPaths } from "@/utils/enums"
+import type { FC } from "react"
 import { Link } from "react-router-dom"
 import { getCookieObject } from "utils"
 import { CookieKeys } from "utils/enums"
@@ -17,6 +18,8 @@ const Sidebar: FC = () => {
 
   const authCookie = getCookieObject<AuthCookie>(CookieKeys.AuthToken)
 
+  const profileImage = authCookie?.photo
+
   return (
     <>
       <SignOutModal />
@@ -25,7 +28,11 @@ const Sidebar: FC = () => {
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <Link to="#" title="Главная" onPointerDown={rippleEffectEvent}>
+              <Link
+                to={RouterPaths.HomePage}
+                title="Главная"
+                onPointerDown={rippleEffectEvent}
+              >
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +63,11 @@ const Sidebar: FC = () => {
             </li>
 
             <li className={styles.navItem}>
-              <Link to="#" title="Профиль" onPointerDown={rippleEffectEvent}>
+              <Link
+                to={RouterPaths.ProfilePage}
+                title="Профиль"
+                onPointerDown={rippleEffectEvent}
+              >
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +121,10 @@ const Sidebar: FC = () => {
         <div className={styles.profile}>
           <div className={styles.profileWrapper}>
             <div className={styles.profileImg}>
-              <img src="/images/avatar-placeholder.png" alt="" />
+              <img
+                src={`/images/${profileImage ?? "avatar-placeholder.png"}`}
+                alt=""
+              />
             </div>
             <span className={styles.profileName}>{authCookie?.firstName}</span>
           </div>

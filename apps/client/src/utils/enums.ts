@@ -4,11 +4,12 @@ export const RouterPaths = {
   HomePage: "/",
   SignInPage: "/sign-in",
   SignUpPage: "/sign-up",
+  ProfilePage: "/profile"
 } as const
 
 export const InputMaskPatterns = {
   Tel: "+7 (999) 999-99-99",
-  Date: "99.99.9999"
+  Date: '99-99-9999'
 } as const
 
 export const PageQueryKeys = {
