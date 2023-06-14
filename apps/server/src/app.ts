@@ -12,8 +12,7 @@ const app = express()
 
 app.use(cors({
   // origin: "https://solid-express-client.vercel.app",
-  // origin: process.env.CLIENT_ORIGIN_URL ?? "http://localhost:3000",
-  origin: "https://turborepo-react-express-client.vercel.app",
+  origin: process.env.CLIENT_ORIGIN_URL ?? "http://localhost:3000",
   credentials: true,
 }))
 app.use(express.urlencoded({ extended: true, limit: "50mb" }))
