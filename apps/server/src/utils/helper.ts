@@ -12,7 +12,7 @@ export const uploadImage = async (base64: string, fileName: string) => {
       Date.now().toString() + "_" + name.replace(/\s/g, "-") + "." + fileExt
 
     await fs.writeFile(
-      path.join(path.dirname(process.cwd()), DirectoryPaths.PublicClientImages, hashedFileName),
+      path.join(DirectoryPaths.PublicClientImages, hashedFileName),
       buffer
     )
 
@@ -30,7 +30,7 @@ export const uploadImage = async (base64: string, fileName: string) => {
 
 export const deleteImage = async (fileName: string) => {
   try {
-    await fs.unlink(path.join(path.dirname(process.cwd()), DirectoryPaths.PublicClientImages, fileName))
+    await fs.unlink(path.join(DirectoryPaths.PublicClientImages, fileName))
   } catch (err: unknown) {
     if (err instanceof Error) throw new Error("Во время удаления файла произошла ошибка: " + err.message)
 
