@@ -37,7 +37,6 @@ const SignInPage: FC = () => {
 
   const redirectionTimerIDRef = useRef<NodeJS.Timeout>()
 
-  const queryTest = trpc.test.useQuery()
   const signInMut = trpc.auth.signIn.useMutation({
     onSuccess() {
       showResponseMessage(
