@@ -32,7 +32,7 @@ const Stats = () => {
             <span>1</span>
           </div>
           <div className={styles.progress}>
-            <ProgressBar value={1} isDanger />
+            <ProgressBar value={4} isDanger />
           </div>
         </li>
       </ul>

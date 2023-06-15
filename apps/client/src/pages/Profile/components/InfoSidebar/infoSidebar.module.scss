@@ -22,6 +22,11 @@
   place-items: center;
 }
 
+.info {
+  display: grid;
+  gap: 0.3rem;
+}
+
 .role {
   color: hsl(var(--primary-hsl));
   text-align: center;

@@ -3,7 +3,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "prisma": "turbo run db:generate"
+    "prisma-generate": "turbo run db:generate",
+    "prisma-push": "turbo run db:push"
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",

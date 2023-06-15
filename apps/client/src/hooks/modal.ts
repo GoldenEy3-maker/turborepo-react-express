@@ -1,6 +1,8 @@
 import { useEffect } from "react"
+import { useLocation } from 'react-router-dom'
 
 export const useModal = () => {
+  const location = useLocation()
   const setScrollbarWidth = () => {
     document.body.style.setProperty("--scrollbar-width", (window.innerWidth - document.body.offsetWidth) + "px")
   }
@@ -25,7 +27,9 @@ export const useModal = () => {
     window.addEventListener("resize", setScrollbarWidth)
 
     return () => window.removeEventListener("resize", setScrollbarWidth)
-  }, [])
+  }, [location])
+
+
 
   return [openModal, closeModal]
 }

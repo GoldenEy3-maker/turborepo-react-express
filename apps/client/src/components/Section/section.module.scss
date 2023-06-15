@@ -1,0 +1,26 @@
+.root {
+  display: grid;
+  gap: 1rem;
+
+  background-color: hsl(var(--surface-hsl));
+  border-radius: var(--medium-shape);
+
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.title {
+  font-size: var(--headline-m-fs);
+  font-weight: 500;
+}
+
+.content {
+  display: grid;
+  place-items: center;
+}

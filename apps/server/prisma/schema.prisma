@@ -17,6 +17,8 @@ model User {
   firstName  String
   lastName   String
   middleName String?
+  email      String?
+  tel        String?
   role       Role
   birthDate  DateTime
   photo      String?

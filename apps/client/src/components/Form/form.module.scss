@@ -1,5 +1,9 @@
 .root {
-  max-width: 20rem;
+  max-width: 18rem;
+
+  &.withGroups {
+    max-width: 40rem;
+  }
 }
 
 .inputs {
@@ -18,6 +22,11 @@
   &._flexEnd {
     justify-content: flex-end;
   }
+}
+
+.group {
+  display: flex;
+  gap: 2rem;
 }
 
 .response {

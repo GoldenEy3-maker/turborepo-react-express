@@ -29,6 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     useEffect(() => {
       if (!isFocus) {
+        console.log(props.value)
         setIsActive(!!props.value)
       }
     }, [isFocus, props.value])

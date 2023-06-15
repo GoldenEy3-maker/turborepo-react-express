@@ -8,6 +8,8 @@
   --_add-inline-padding: 0.3rem;
   --_padding-bottom: 0.6rem;
 
+  max-width: 18rem;
+
   label {
     position: absolute;
     top: calc((var(--_padding-top) + var(--_padding-bottom)) / 2);

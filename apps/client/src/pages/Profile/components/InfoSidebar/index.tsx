@@ -57,14 +57,17 @@ const InfoSidebar = () => {
           }
         }}
       />
-      {authCookie ? (
-        <span className={styles.role}>{traslateRole(authCookie.role)}</span>
-      ) : null}
-      {authCookie ? (
-        <p className={styles.bio}>
-          {authCookie.lastName} {authCookie.firstName} {authCookie.middleName}
-        </p>
-      ) : null}
+      <div className={styles.info}>
+        {authCookie ? (
+          <span className={styles.role}>{traslateRole(authCookie.role)}</span>
+        ) : null}
+        {authCookie ? (
+          <p className={styles.bio}>
+            {authCookie.lastName} {authCookie.firstName} {authCookie.middleName}
+          </p>
+        ) : null}
+      </div>
+
       <div className={styles.stats}>
         <hr />
         <ul className={styles.list}>

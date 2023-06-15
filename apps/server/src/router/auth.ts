@@ -23,10 +23,14 @@ export const authRouter = router({
     const user = await prisma.user.findUnique({
       where: {
         login: input.login
-      }
+      },
     })
 
     if (!user) throw new Error("Указан неверный логин или пароль!")
+
+    const isMatch = await bcrypt.compare(input.password, user.password)
+
+    if (!isMatch) throw new Error("Указан неверный логин или пароль!")
 
     if (!process.env.JWT_KEY) throw new Error("В данный момент сервер нестабилен. Отсутствуют важные системные переменные! Повторите попытку позже.")
 

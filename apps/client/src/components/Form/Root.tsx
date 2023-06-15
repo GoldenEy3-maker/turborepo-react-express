@@ -1,12 +1,24 @@
 import { cls } from "@/utils/helpers"
-import { DetailedHTMLProps, FC, FormHTMLAttributes } from "react"
+import type { DetailedHTMLProps, FC, FormHTMLAttributes } from "react"
 import styles from "./form.module.scss"
 
-export const Root: FC<
-  DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
-> = ({ children, className, ...props }) => {
+type RootProps = {
+  withGroups?: boolean
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
+
+export const Root: FC<RootProps> = ({
+  children,
+  className,
+  withGroups,
+  ...props
+}) => {
   return (
-    <form className={cls([className, styles.root])} {...props}>
+    <form
+      className={cls([className, styles.root], {
+        [styles.withGroups]: !!withGroups,
+      })}
+      {...props}
+    >
       {children}
     </form>
   )
