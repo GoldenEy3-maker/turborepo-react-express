@@ -5,6 +5,8 @@
   position: relative;
   overflow: hidden;
 
+  flex-shrink: 0;
+
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -18,6 +20,10 @@
 
   transition: 200ms ease;
 
+  &[type="submit"] {
+    gap: 0;
+  }
+
   svg {
     fill: hsla(var(--_clr));
   }
@@ -26,16 +32,43 @@
     padding: 0.5rem;
   }
 
+  &._danger {
+    --ripple-hsl: var(--danger-hsl);
+
+    --_clr: var(--danger-hsl);
+  }
+
+  &._success {
+    --ripple-hsl: var(--success-hsl);
+
+    --_clr: var(--success-hsl);
+  }
+
+  &._warning {
+    --ripple-hsl: var(--warning-hsl);
+
+    --_clr: var(--warning-hsl);
+  }
+
   &._elevated {
-    --_bg-clr: var(--primary-base-hsl), 70%, 0.15;
+    --_bg-clr: 274, 10%, 20%;
 
     &._danger {
-      --_bg-clr: var(--danger-hsl), 0.15;
+      --_bg-clr: 0, 10%, 20%;
+    }
+
+    &._success {
+      --_bg-clr: 118, 10%, 20%;
+    }
+
+    &._warning {
+      --_bg-clr: 54, 10%, 20%;
     }
   }
 
   &._filled {
     --ripple-hsl: var(--background-hsl);
+
     --_clr: var(--on-primary-hsl);
     --_bg-clr: var(--primary-hsl);
 
@@ -44,33 +77,55 @@
       --_clr: var(--on-danger-hsl);
       --_bg-clr: var(--danger-hsl);
     }
-  }
 
-  &[type="submit"] {
-    gap: 0;
-  }
+    &._success {
+      --ripple-hsl: var(--background-hsl);
+      --_clr: var(--on-success-hsl);
+      --_bg-clr: var(--success-hsl);
+    }
 
-  &._danger {
-    --ripple-hsl: var(--danger-hsl);
-
-    --_clr: var(--danger-hsl);
+    &._warning {
+      --ripple-hsl: var(--background-hsl);
+      --_clr: var(--on-warning-hsl);
+      --_bg-clr: var(--warning-hsl);
+    }
   }
 
   &:disabled {
-    --_clr: var(--primary-hsl), 0.5;
+    --_clr: 274, 30%, 60%;
 
     cursor: not-allowed;
 
     &._danger {
-      --_clr: var(--danger-hsl), 0.5;
+      --_clr: 0, 50%, 60%;
+    }
+
+    &._success {
+      --_clr: 118, 40%, 40%;
+    }
+
+    &._warning {
+      --_clr: 54, 40%, 40%;
     }
 
     &._filled {
-      --_clr: var(--on-primary-hsl), 0.8;
-      --_bg-clr: var(--primary-hsl), 0.7;
+      --_clr: var(--on-primary-hsl);
+      --_bg-clr: 274, 30%, 60%;
 
       &._danger {
-        --_bg-clr: var(--danger-hsl), 0.7;
+        --_clr: var(--on-danger-hsl);
+
+        --_bg-clr: 0, 50%, 50%;
+      }
+      &._success {
+        --_clr: var(--on-success-hsl);
+
+        --_bg-clr: 118, 30%, 50%;
+      }
+      &._warning {
+        --_clr: var(--on-warning-hsl);
+
+        --_bg-clr: 54, 50%, 50%;
       }
     }
 
@@ -84,52 +139,97 @@
   }
 
   &:focus-visible {
-    --_bg-clr: var(--primary-hsl), 0.1;
+    --_bg-clr: 274, 15%, 25%;
 
     outline: none;
 
     &._danger {
-      --_bg-clr: var(--danger-hsl), 0.1;
+      --_bg-clr: 0, 15%, 25%;
+    }
+
+    &._success {
+      --_bg-clr: 118, 15%, 25%;
+    }
+
+    &._warning {
+      --_bg-clr: 54, 15%, 25%;
     }
 
     &._filled {
-      --_bg-clr: var(--primary-base-hsl), 75%;
+      --_bg-clr: var(--primary-base-hsl), 85%;
 
       &._danger {
         --_bg-clr: var(--danger-base-hsl), 75%;
       }
+
+      &._success {
+        --_bg-clr: var(--success-base-hsl), 60%;
+      }
+
+      &._warning {
+        --_bg-clr: var(--warning-base-hsl), 70%;
+      }
     }
 
     &._elevated {
-      --_bg-clr: var(--primary-base-hsl), 70%, 0.2;
+      --_bg-clr: 274, 15%, 23%;
 
       &._danger {
-        --_bg-clr: var(--danger-hsl), 0.2;
+        --_bg-clr: 0, 15%, 23%;
+      }
+
+      &._success {
+        --_bg-clr: 118, 15%, 23%;
+      }
+
+      &._warning {
+        --_bg-clr: 54, 15%, 23%;
       }
     }
   }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover:not(:disabled) {
-      --_bg-clr: var(--primary-hsl), 0.1;
+      --_bg-clr: 274, 15%, 30%;
 
       &._danger {
-        --_bg-clr: var(--danger-hsl), 0.1;
+        --_bg-clr: 0, 15%, 30%;
+      }
+
+      &._success {
+        --_bg-clr: 118, 15%, 30%;
+      }
+
+      &._warning {
+        --_bg-clr: 54, 15%, 30%;
       }
 
       &._filled {
-        --_bg-clr: var(--primary-base-hsl), 75%;
+        --_bg-clr: var(--primary-base-hsl), 90%;
 
         &._danger {
-          --_bg-clr: var(--danger-base-hsl), 75%;
+          --_bg-clr: var(--danger-base-hsl), 80%;
+        }
+        &._success {
+          --_bg-clr: var(--success-base-hsl), 75%;
+        }
+        &._warning {
+          --_bg-clr: var(--warning-base-hsl), 80%;
         }
       }
 
       &._elevated {
-        --_bg-clr: var(--primary-base-hsl), 70%, 0.25;
+        --_bg-clr: 274, 15%, 26%;
 
         &._danger {
-          --_bg-clr: var(--danger-hsl), 0.25;
+          --_bg-clr: 0, 15%, 26%;
+        }
+        &._success {
+          --_bg-clr: 118, 15%, 26%;
+        }
+
+        &._warning {
+          --_bg-clr: 54, 15%, 26%;
         }
       }
     }

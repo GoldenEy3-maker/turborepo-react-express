@@ -10,7 +10,7 @@ import styles from "./button.module.scss"
 
 type ButtonProps = {
   variant?: "elevated" | "filled"
-  isDanger?: boolean
+  clrType?: "danger" | "success" | "warning"
   isIcon?: boolean
   children?: ReactNode
 } & DetailedHTMLProps<
@@ -23,7 +23,7 @@ const Button: FC<ButtonProps> = ({
   className,
   onPointerDown,
   variant,
-  isDanger,
+  clrType,
   isIcon,
   ...props
 }) => {
@@ -34,7 +34,9 @@ const Button: FC<ButtonProps> = ({
       className={cls([className, styles.button], {
         [styles._filled]: variant === "filled",
         [styles._elevated]: variant === "elevated",
-        [styles._danger]: !!isDanger,
+        [styles._danger]: clrType === "danger",
+        [styles._success]: clrType === "success",
+        [styles._warning]: clrType === "warning",
         [styles._icon]: !!isIcon,
       })}
       onPointerDown={(event) => {

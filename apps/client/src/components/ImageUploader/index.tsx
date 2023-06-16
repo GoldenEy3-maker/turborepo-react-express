@@ -41,7 +41,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
         <Button
           variant="filled"
           isIcon
-          isDanger
+          clrType="danger"
           className={styles.cancel}
           onClick={reset}
           aria-hidden={!previews}

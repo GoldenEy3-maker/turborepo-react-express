@@ -3,7 +3,7 @@ import * as Modal from "@/components/Modal"
 import { useModal } from "@/hooks/modal"
 import { RouterPaths } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
-import { FC } from "react"
+import type { FC } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSignOutModalStore } from "./store"
 
@@ -45,7 +45,7 @@ const SignOutModal: FC = () => {
           </Button>
           <Button
             variant="elevated"
-            isDanger
+            clrType="danger"
             type="button"
             title="Да, выйти"
             disabled={signOutMut.isLoading}

@@ -2,7 +2,8 @@ import Button from "@/components/Button"
 import * as Form from "@/components/Form"
 import Input from "@/components/Input"
 import Logo from "@/components/Logo"
-import { useResponseMessage } from "@/hooks/responseMessage"
+import Notify from "@/components/Notify"
+import { useNotify } from "@/hooks/notify"
 import { RouterPaths } from "@/utils/enums"
 import { cls } from "@/utils/helpers"
 import { trpc } from "@/utils/trpc"
@@ -26,12 +27,14 @@ type FormState = {
 
 const SignInPage: FC = () => {
   const {
-    responseState,
-    responseMessage,
-    responseType,
-    showResponseMessage,
-    closeResponseMessage,
-  } = useResponseMessage()
+    notifyRef,
+    notifyMessage,
+    notifyState,
+    notifyTitle,
+    notifyType,
+    showNotify,
+    closeNotify,
+  } = useNotify()
 
   const navigator = useNavigate()
 
@@ -39,18 +42,18 @@ const SignInPage: FC = () => {
 
   const signInMut = trpc.auth.signIn.useMutation({
     onSuccess() {
-      showResponseMessage(
-        "Авторизация прошла успешно!\nЧерез 5 секунд вас направит на главную страницу.",
-        "success",
-        5000
-      )
+      showNotify({
+        message: "Через 5 секунд вас направит на главную страницу.",
+        title: "Авторизация прошла успешно!",
+        type: "success",
+      })
 
       redirectionTimerIDRef.current = setTimeout(() => {
         navigator(RouterPaths.HomePage)
       }, 5000)
     },
     onError(error) {
-      showResponseMessage(error.message, "danger")
+      showNotify({ message: error.message, title: "Ошибка!", type: "danger" })
     },
   })
 
@@ -68,13 +71,22 @@ const SignInPage: FC = () => {
 
   return (
     <>
+      <Notify
+        ref={notifyRef}
+        state={notifyState}
+        title={notifyTitle}
+        type={notifyType}
+        closeHandler={closeNotify}
+      >
+        {notifyMessage}
+      </Notify>
       <Logo isMinimized={true} />
       <h1 className={cls([styles.title, "page-title _centered"])}>
         Авторизация
       </h1>
       <Form.Root
         onSubmit={handleSubmit((data) => {
-          closeResponseMessage()
+          closeNotify()
 
           signInMut.mutate(data)
         })}
@@ -141,9 +153,6 @@ const SignInPage: FC = () => {
             )}
           />
         </Form.Inputs>
-        <Form.Response state={responseState} type={responseType}>
-          {responseMessage}
-        </Form.Response>
         <Form.Actions flexEnd>
           <Link to={RouterPaths.SignUpPage} title="Создать аккаунт?">
             Создать аккаунт?

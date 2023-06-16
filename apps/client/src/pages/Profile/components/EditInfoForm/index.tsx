@@ -1,8 +1,9 @@
 import Button from "@/components/Button"
 import * as Form from "@/components/Form"
 import Input from "@/components/Input"
+import Notify from "@/components/Notify"
 import * as Section from "@/components/Section"
-import { useResponseMessage } from "@/hooks/responseMessage"
+import { useNotify } from "@/hooks/notify"
 import { InputMaskPatterns } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
 import { useEffect } from "react"
@@ -31,12 +32,14 @@ type FormState = {
 
 const EdiInfoForm = () => {
   const {
-    closeResponseMessage,
-    responseMessage,
-    responseState,
-    responseType,
-    showResponseMessage,
-  } = useResponseMessage()
+    closeNotify,
+    showNotify,
+    notifyTitle,
+    notifyState,
+    notifyMessage,
+    notifyType,
+    notifyRef,
+  } = useNotify()
 
   const {
     handleSubmit,
@@ -62,13 +65,21 @@ const EdiInfoForm = () => {
   const updateInfoMut = trpc.user.updateInfo.useMutation({
     onSuccess(data) {
       if (data) {
-        showResponseMessage(data.message, "success")
+        showNotify({
+          message: data.message,
+          title: "Успешно",
+          type: "success",
+        })
         setValue("newPassword", "")
         setValue("oldPassword", "")
       }
     },
     onError(error) {
-      showResponseMessage(error.message, "danger")
+      showNotify({
+        message: error.message,
+        title: "Ошибка",
+        type: "danger",
+      })
     },
   })
 
@@ -87,6 +98,15 @@ const EdiInfoForm = () => {
 
   return (
     <Section.Root>
+      <Notify
+        ref={notifyRef}
+        state={notifyState}
+        type={notifyType}
+        title={notifyTitle}
+        closeHandler={closeNotify}
+      >
+        {notifyMessage}
+      </Notify>
       <Section.Header>
         <Section.Title>Изменить личную информацию</Section.Title>
       </Section.Header>
@@ -94,7 +114,7 @@ const EdiInfoForm = () => {
         <Form.Root
           withGroups
           onSubmit={handleSubmit((data) => {
-            closeResponseMessage()
+            closeNotify()
 
             updateInfoMut.mutate(data)
           })}
@@ -364,9 +384,7 @@ const EdiInfoForm = () => {
               />
             </Form.Group>
           </Form.Inputs>
-          <Form.Response state={responseState} type={responseType}>
-            {responseMessage}
-          </Form.Response>
+
           <Form.Actions>
             <Button
               type="submit"

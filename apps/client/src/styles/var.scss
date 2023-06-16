@@ -32,7 +32,9 @@
   --hover-danger-container-hsl: var(--danger-base-hsl), 93%;
   --success-container-hsl: var(--success-container-base-hsl), 85%;
   --success-hsl: var(--success-base-hsl), 50%;
+  --on-success-hsl: var(--success-base-hsl), 20%;
   --warning-hsl: var(--warning-base-hsl), 60%;
+  --on-warning-hsl: var(--warning-base-hsl), 20%;
   --warning-container-hsl: var(--warning-container-base-hsl), 92%;
   --loading-skeleton-hsl: var(--loading-skeleton-base-hsl), 96%;
   --active-loading-skeleton-hsl: var(--loading-skeleton-base-hsl), 92%;
