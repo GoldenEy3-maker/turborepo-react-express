@@ -24,7 +24,7 @@
   }
 
   &Divider {
-    background-color: hsla(var(--on-background-hsl), 0.1);
+    background-color: hsl(var(--outline-hsl));
     height: 2px;
   }
 
@@ -57,7 +57,7 @@
       &:focus {
         outline: none;
 
-        background-color: hsla(var(--primary-hsl), 0.1);
+        background-color: hsla(274, 15%, 15%);
 
         color: hsl(var(--primary-hsl));
 
@@ -71,7 +71,7 @@
   @media (hover: hover) and (pointer: fine) {
     &Item {
       a:hover {
-        background-color: hsla(var(--primary-hsl), 0.1);
+        background-color: hsla(274, 15%, 20%);
 
         color: hsl(var(--primary-hsl));
 

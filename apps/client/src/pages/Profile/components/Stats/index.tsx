@@ -7,12 +7,12 @@ const Stats = () => {
       <ul className={styles.list}>
         <li className={styles.item}>
           <div className={styles.info}>
-            <h4 className={styles.title}>Всего заказов</h4>
-            <p>Количество всех заказов</p>
-            <span>25</span>
+            <h4 className={styles.title}>Активность</h4>
+            <p>Ваша активность работы</p>
+            {/* <span>25</span> */}
           </div>
           <div className={styles.progress}>
-            <ProgressBar value={100} />
+            <ProgressBar value={60} />
           </div>
         </li>
         <li className={styles.item}>

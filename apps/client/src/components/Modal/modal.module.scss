@@ -28,9 +28,9 @@
 .wrapper {
   background-color: hsl(var(--surface-hsl));
 
-  border-radius: var(--large-shape);
+  border-radius: var(--medium-shape);
 
-  padding: 1rem 2rem;
+  overflow: hidden;
 
   max-width: 40rem;
 }
@@ -40,6 +40,12 @@
   align-items: center;
   gap: 1rem;
   justify-content: center;
+
+  background-color: hsl(var(--background-base-hsl), 10%);
+
+  border-bottom: 1px solid hsl(var(--outline-hsl));
+
+  padding: 1rem 2rem;
 
   &._spaceBetween {
     justify-content: space-between;
@@ -54,7 +60,9 @@
 }
 
 .content {
-  margin-top: 0.5rem;
+  padding: 1rem 2rem;
+
+  background-color: hsl(var(--surface-container-hsl));
 }
 
 .actions {
@@ -63,5 +71,9 @@
   justify-content: flex-end;
   gap: 1rem;
 
-  margin-top: 1rem;
+  background-color: hsl(var(--background-base-hsl), 10%);
+
+  border-top: 1px solid hsl(var(--outline-hsl));
+
+  padding: 1rem 2rem;
 }

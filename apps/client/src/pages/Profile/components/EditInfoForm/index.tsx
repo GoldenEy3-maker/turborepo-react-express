@@ -107,10 +107,10 @@ const EdiInfoForm = () => {
       >
         {notifyMessage}
       </Notify>
-      <Section.Header>
+      <Section.Header isCenter>
         <Section.Title>Изменить личную информацию</Section.Title>
       </Section.Header>
-      <Section.Content>
+      <Section.Content isCenter>
         <Form.Root
           withGroups
           onSubmit={handleSubmit((data) => {

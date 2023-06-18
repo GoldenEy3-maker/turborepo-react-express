@@ -14,8 +14,8 @@
   /* HSL */
   --background-hsl: var(--background-base-hsl), 7%;
   --on-background-hsl: var(--background-base-hsl), 100%;
-  --surface-hsl: var(--background-base-hsl), 15%;
-  --surface-container-hsl: var(--background-base-hsl), 19%;
+  --surface-hsl: var(--background-base-hsl), 12%;
+  --surface-container-hsl: var(--background-base-hsl), 17%;
   --surface-container-low-hsl: var(--primary-base-hsl), 96%;
   --surface-container-high-hsl: var(--primary-base-hsl), 93%;
   --surface-container-highest-hsl: var(--primary-base-hsl), 92%;
@@ -23,7 +23,7 @@
   --primary-container-hsl: var(--primary-container-base-hsl), 22%;
   --on-primary-hsl: var(--primary-base-hsl), 20%;
   --hover-primary-hsl: var(--primary-base-hsl), 44%;
-  --outline-hsl: var(--background-base-hsl), 50%;
+  --outline-hsl: var(--background-base-hsl), 30%;
   --ripple-hsl: var(--primary-hsl);
   --default-hover-hsl: var(--default-hover-base-hsl), 90%;
   --danger-container-hsl: var(--danger-base-hsl), 96%;

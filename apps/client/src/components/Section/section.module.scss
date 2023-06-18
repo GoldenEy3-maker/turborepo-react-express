@@ -1,4 +1,6 @@
 .root {
+  flex: 1;
+
   display: grid;
   gap: 1rem;
 
@@ -8,11 +10,21 @@
   padding: 2rem;
 }
 
+.group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+
+  &._center {
+    justify-content: center;
+  }
 }
 
 .title {
@@ -22,5 +34,8 @@
 
 .content {
   display: grid;
-  place-items: center;
+
+  &._center {
+    place-items: center;
+  }
 }
