@@ -1,4 +1,4 @@
-export const formatDate = (value: string) => value.split(".").reverse().join(".")
+export const formatDate = (value: string) => value.split("-").reverse().join(".")
 
 export const dateDiff = (endDate: Date, startDate: Date) => {
   const diff = endDate.getTime() - startDate.getTime()

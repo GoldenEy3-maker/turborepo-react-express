@@ -120,7 +120,7 @@ const SignUpPage: FC = () => {
         onSubmit={handleSubmit((data) => {
           closeNotify()
 
-          signUpMut.mutate(data)
+          signUpMut.mutate({ ...data, birthDate: formatDate(data.birthDate) })
         })}
         noValidate
       >

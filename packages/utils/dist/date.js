@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dateDiff = exports.formatDate = void 0;
-const formatDate = (value) => value.split(".").reverse().join(".");
+const formatDate = (value) => value.split("-").reverse().join(".");
 exports.formatDate = formatDate;
 const dateDiff = (endDate, startDate) => {
     const diff = endDate.getTime() - startDate.getTime();
