@@ -1,12 +1,12 @@
 import { cls } from "@/utils/helpers"
-import type { DetailedHTMLProps, InputHTMLAttributes } from "react"
+import type { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react"
 import { forwardRef, useEffect, useState } from "react"
 import styles from "./input.module.scss"
 
 type InputProps = {
-  label: string
-  leadingIcon?: JSX.Element
-  trailingIcon?: JSX.Element
+  label?: string
+  leadingIcon?: ReactNode
+  trailingIcon?: ReactNode
   validError?: string | string[]
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
@@ -27,6 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const [isActive, setIsActive] = useState(false)
     const [isFocus, setIsFocus] = useState(false)
 
+
     useEffect(() => {
       if (!isFocus) {
         setIsActive(!!props.value)
@@ -40,14 +41,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           [styles._withLeading]: !!leadingIcon,
           [styles._withTrailing]: !!trailingIcon,
           [styles._disabled]: !!props.disabled,
-          [styles._notValid]: !!validError,
+          [styles._notValid]: !!validError
+
         })}
       >
         <div className={styles.wrapper}>
           {leadingIcon ? (
             <div className={styles.leading}>{leadingIcon}</div>
           ) : null}
-          <label htmlFor={props.id}>{label}</label>
+          {label ? <label htmlFor={props.id}>{label}</label> : null}
 
           <input
             onFocus={(event) => {

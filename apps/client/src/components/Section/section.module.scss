@@ -2,7 +2,7 @@
   flex: 1;
 
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
 
   background-color: hsl(var(--surface-hsl));
   border-radius: var(--medium-shape);
@@ -28,6 +28,10 @@
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
   font-size: var(--headline-m-fs);
   font-weight: 500;
 }

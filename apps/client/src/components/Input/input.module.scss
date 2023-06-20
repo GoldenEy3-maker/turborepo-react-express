@@ -45,14 +45,14 @@
   &._withLeading {
     --_padding-left: calc(
       var(--_icons-padding-inner) + var(--_icons-padding-outer) +
-        var(--_icons-size) + var(--_add-inline-padding)
+      var(--_icons-size) + var(--_add-inline-padding)
     );
   }
 
   &._withTrailing {
     --_padding-right: calc(
       var(--_icons-padding-inner) + var(--_icons-padding-outer) +
-        var(--_icons-size) + var(--_add-inline-padding)
+      var(--_icons-size) + var(--_add-inline-padding)
     );
   }
 

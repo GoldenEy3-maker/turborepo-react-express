@@ -1,0 +1,87 @@
+.root {
+  position: relative;
+
+  font-size: var(--body-l-fs);
+}
+
+.trigger {
+  display: flex;
+
+  input {
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .icon {
+    flex-shrink: 0;
+
+    transition: 200ms ease;
+
+    ._active & {
+      rotate: 180deg;
+    }
+  }
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  min-width: 100%;
+
+  opacity: 0;
+  visibility: hidden;
+
+  border-radius: var(--medium-shape);
+
+  max-width: 15em;
+
+  background-color: hsl(var(--surface-container-hsl));
+
+  overflow: hidden;
+
+  transition: 200ms ease;
+
+  button {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    padding: 0.5rem 1rem;
+
+    transition: 200ms ease;
+
+    &:focus {
+      outline: none;
+
+      background-color: hsl(274, 15%, 25%);
+    }
+
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: hsl(274, 15%, 30%);
+      }
+    }
+  }
+
+  ._active & {
+    top: 120%;
+
+    opacity: 1;
+    visibility: visible;
+  }
+}
