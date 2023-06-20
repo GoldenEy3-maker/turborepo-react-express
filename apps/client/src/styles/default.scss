@@ -38,10 +38,6 @@ body {
   }
 }
 
-svg {
-  fill: hsl(var(--on-background-hsl));
-}
-
 a {
   color: hsl(var(--primary-hsl));
 }
@@ -76,9 +72,6 @@ svg {
   height: auto;
 }
 
-path {
-  stroke: inherit;
-}
 
 img,
 picture,

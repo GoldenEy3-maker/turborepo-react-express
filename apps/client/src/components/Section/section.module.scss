@@ -1,9 +1,6 @@
 .root {
   flex: 1;
 
-  display: grid;
-  gap: 1.5rem;
-
   background-color: hsl(var(--surface-hsl));
   border-radius: var(--medium-shape);
 
@@ -37,9 +34,10 @@
 }
 
 .content {
-  display: grid;
+  padding-top: 1.5rem;
 
   &._center {
+  display: grid;
     place-items: center;
   }
 }

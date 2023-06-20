@@ -22,7 +22,7 @@ const Sidebar: FC = () => {
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <Link
+              <Link className={styles.navItemLink}
                 to={RouterPaths.HomePage}
                 title="Главная"
                 onPointerDown={rippleEffectEvent}
@@ -42,7 +42,7 @@ const Sidebar: FC = () => {
               </Link>
             </li>
             <li className={styles.navItem}>
-              <Link to="#" title="Заказы" onPointerDown={rippleEffectEvent}>
+              <Link className={styles.navItemLink} to="#" title="Заказы" onPointerDown={rippleEffectEvent}>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ const Sidebar: FC = () => {
             </li>
 
             <li className={styles.navItem}>
-              <Link
+              <Link className={styles.navItemLink}
                 to={RouterPaths.ProfilePage}
                 title="Профиль"
                 onPointerDown={rippleEffectEvent}
@@ -80,7 +80,7 @@ const Sidebar: FC = () => {
             </li>
             <hr className={styles.navDivider} />
             <li className={styles.navItem}>
-              <Link to="#" title="Резюме" onPointerDown={rippleEffectEvent}>
+              <Link className={styles.navItemLink} to="#" title="Резюме" onPointerDown={rippleEffectEvent}>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const Sidebar: FC = () => {
               </Link>
             </li>
             <li className={styles.navItem}>
-              <Link
+              <Link className={styles.navItemLink}
                 to="#"
                 title="Ваши заказы"
                 onPointerDown={rippleEffectEvent}

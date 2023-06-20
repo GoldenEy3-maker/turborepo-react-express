@@ -5,6 +5,7 @@ import Stats from "./components/Stats"
 import styles from "./home.module.scss"
 import TopPerformers from "@/pages/Home/components/TopPerformers"
 import TopEmployers from "@/pages/Home/components/TopEmployers"
+import PopularTopics from "@/pages/Home/components/PopularTopics"
 
 const HomePage: FC = () => {
   return (
@@ -12,11 +13,7 @@ const HomePage: FC = () => {
       <Stats />
       <Section.Group>
         <Chart />
-        <Section.Root>
-          <Section.Header>
-            <Section.Title>Популярные темы</Section.Title>
-          </Section.Header>
-        </Section.Root>
+        <PopularTopics />
       </Section.Group>
       <Section.Group>
         <TopPerformers />

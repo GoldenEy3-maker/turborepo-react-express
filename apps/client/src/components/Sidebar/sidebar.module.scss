@@ -29,7 +29,7 @@
   }
 
   &Item {
-    a {
+    &Link {
       position: relative;
       overflow: hidden;
 
@@ -51,6 +51,7 @@
       svg {
         width: 28px;
         height: 28px;
+        fill: hsl(var(--on-background-hsl));
         transition: 200ms ease;
       }
 
