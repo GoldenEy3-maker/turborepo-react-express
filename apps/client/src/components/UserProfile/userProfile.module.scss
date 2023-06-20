@@ -1,0 +1,35 @@
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .img {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    background-color: hsl(var(--outline-hsl));
+
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+  }
+
+  span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &._extraSizeName {
+    span {
+      font-size: var(--title-l-fs);
+    }
+  }
+}

@@ -6,27 +6,7 @@ const Stats = () => {
     <ul className={styles.list}>
       <li className={styles.item}>
         <header className={styles.itemHeader}>
-          <p className={styles.itemTitle}>Available to witdraw</p>
-          <div className={cls([styles.itemProgress])}>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="20"
-                viewBox="0 -960 960 960"
-                width="20"
-              >
-                <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
-              </svg>
-            </span>
-            <p> 10.0%</p>
-          </div>
-        </header>
-        <h3 className={styles.itemValue}>$1,567.99</h3>
-        <p className={styles.itemExtra}>Wed, Jul 20</p>
-      </li>
-      <li className={styles.item}>
-        <header className={styles.itemHeader}>
-          <p className={styles.itemTitle}>Today Revenue</p>
+          <p className={styles.itemTitle}>Стоимость заказов</p>
           <div className={cls([styles.itemProgress, styles._danger])}>
             <span>
               <svg
@@ -41,13 +21,14 @@ const Stats = () => {
             <p>3.0%</p>
           </div>
         </header>
-        <h3 className={styles.itemValue}>$2,868.99</h3>
-        <p className={styles.itemExtra}>143 Orders</p>
+        <h3 className={styles.itemValue}>100 000 ₽</h3>
+        <p className={styles.itemExtra}>24 заказа</p>
       </li>
+
       <li className={styles.item}>
         <header className={styles.itemHeader}>
-          <p className={styles.itemTitle}>Today Sessions</p>
-          <div className={cls([styles.itemProgress])}>
+          <p className={styles.itemTitle}>Кол-во заказов</p>
+          <div className={cls([styles.itemProgress, styles._success])}>
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,13 +42,33 @@ const Stats = () => {
             <p>3.2%</p>
           </div>
         </header>
-        <h3 className={styles.itemValue}>156k</h3>
-        <p className={styles.itemExtra}>32k Visitors</p>
+        <h3 className={styles.itemValue}>24</h3>
+        <p className={styles.itemExtra}>За последний месяц</p>
       </li>
       <li className={styles.item}>
         <header className={styles.itemHeader}>
-          <p className={styles.itemTitle}>Subscribers</p>
-          <div className={cls([styles.itemProgress])}>
+          <p className={styles.itemTitle}>Личный рейтинг</p>
+          <div className={cls([styles.itemProgress, styles._success])}>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="20"
+                viewBox="0 -960 960 960"
+                width="20"
+              >
+                <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
+              </svg>
+            </span>
+            <p>10.0%</p>
+          </div>
+        </header>
+        <h3 className={styles.itemValue}>4,7</h3>
+        <p className={styles.itemExtra}>Вс, 18 июня</p>
+      </li>
+      <li className={styles.item}>
+        <header className={styles.itemHeader}>
+          <p className={styles.itemTitle}>Просмотры резюме</p>
+          <div className={cls([styles.itemProgress, styles._success])}>
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,8 +82,8 @@ const Stats = () => {
             <p>8.3%</p>
           </div>
         </header>
-        <h3 className={styles.itemValue}>3,422</h3>
-        <p className={styles.itemExtra}>$34.28 Average Order</p>
+        <h3 className={styles.itemValue}>326</h3>
+        <p className={styles.itemExtra}>За последнюю неделю</p>
       </li>
     </ul>
   )

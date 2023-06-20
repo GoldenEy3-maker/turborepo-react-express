@@ -43,7 +43,7 @@ const SignInPage: FC = () => {
   const signInMut = trpc.auth.signIn.useMutation({
     onSuccess() {
       showNotify({
-        message: "Через 5 секунд вас направит на главную страницу.",
+        message: "Скоро вас направит на главную страницу.",
         title: "Авторизация прошла успешно!",
         type: "success",
       })

@@ -3,6 +3,8 @@ import { type FC } from "react"
 import Chart from "./components/Chart"
 import Stats from "./components/Stats"
 import styles from "./home.module.scss"
+import TopPerformers from "@/pages/Home/components/TopPerformers"
+import Link from "@/components/Link"
 
 const HomePage: FC = () => {
   return (
@@ -30,8 +32,12 @@ const HomePage: FC = () => {
       <Section.Group>
         <Section.Root>
           <Section.Header>
-            <Section.Title>Работники месяца</Section.Title>
+            <Section.Title>Топ исполнители месяца</Section.Title>
+            <Link to='#'>Посмотреть все</Link>
           </Section.Header>
+          <Section.Content>
+            <TopPerformers />
+          </Section.Content>
         </Section.Root>
         <Section.Root>
           <Section.Header>

@@ -166,6 +166,10 @@ const SignUpPage: FC = () => {
                 value: true,
                 message: "Обязательное поле!",
               },
+              pattern: {
+                value: new RegExp(/^[А-ЯЁа-яё]+$/, "g"),
+                message: "Только кириллица!",
+              },
             }}
             render={({ field }) => (
               <Input
@@ -196,6 +200,10 @@ const SignUpPage: FC = () => {
                 value: true,
                 message: "Обязательное поле!",
               },
+              pattern: {
+                value: new RegExp(/^[А-ЯЁа-яё]+$/, "g"),
+                message: "Только кириллица!",
+              },
             }}
             render={({ field }) => (
               <Input
@@ -221,6 +229,12 @@ const SignUpPage: FC = () => {
           <Controller
             name="middleName"
             control={control}
+            rules={{
+              pattern: {
+                value: new RegExp(/^[А-ЯЁа-яё]+$/, "g"),
+                message: "Только кириллица!",
+              },
+            }}
             render={({ field }) => (
               <Input
                 label="Отчество"

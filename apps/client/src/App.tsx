@@ -12,7 +12,7 @@ const ProfilePage = lazy(() => import("./pages/Profile"))
 const SignInPage = lazy(() => import("./pages/SignIn"))
 const SignUpPage = lazy(() => import("./pages/SignUp"))
 
-function App() {
+const App = () => {
   const { trpcClient, queryClient } = useTrpcClient()
 
   return (
@@ -21,16 +21,16 @@ function App() {
         <BrowserRouter>
           <div className="wrapper">
             <Routes>
-              <Route element={<MainLayout />}>
-                <Route index element={<HomePage />} />
+              <Route element={<MainLayout/>}>
+                <Route index element={<HomePage/>}/>
                 <Route
                   path={RouterPaths.ProfilePage}
-                  element={<ProfilePage />}
+                  element={<ProfilePage/>}
                 />
               </Route>
-              <Route element={<AuthLayout />}>
-                <Route path={RouterPaths.SignInPage} element={<SignInPage />} />
-                <Route path={RouterPaths.SignUpPage} element={<SignUpPage />} />
+              <Route element={<AuthLayout/>}>
+                <Route path={RouterPaths.SignInPage} element={<SignInPage/>}/>
+                <Route path={RouterPaths.SignUpPage} element={<SignUpPage/>}/>
               </Route>
             </Routes>
           </div>

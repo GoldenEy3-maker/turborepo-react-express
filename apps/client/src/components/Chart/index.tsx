@@ -1,4 +1,4 @@
-import type { ChartArea, ChartData, ChartOptions, ChartType } from "chart.js"
+import type { ChartArea, ChartData, ChartOptions, ChartType, Plugin } from "chart.js"
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -7,7 +7,7 @@ import {
   LineElement,
   LinearScale,
   PointElement,
-  Tooltip,
+  Tooltip
 } from "chart.js"
 import { useState } from "react"
 import { Chart } from "react-chartjs-2"
@@ -41,15 +41,15 @@ type CustomChartProps = {
 }
 
 const CustomChart = ({
-  width,
-  height,
-  options,
-  data,
-  type = "line",
-  gradiant,
-}: CustomChartProps) => {
+                       width,
+                       height,
+                       options,
+                       data,
+                       type = "line",
+                       gradiant
+                     }: CustomChartProps) => {
   const [chartData, setChartData] = useState<ChartData>({
-    ...data,
+    ...data
   })
 
   const createGradient = (ctx: CanvasRenderingContext2D, area: ChartArea) => {
@@ -63,6 +63,31 @@ const CustomChart = ({
     return canvasGradiant
   }
 
+  const hoverLine: Plugin<typeof type> = {
+    id: "hoverLine",
+    afterDatasetDraw(chart) {
+      const { ctx, chartArea, tooltip, scales } = chart
+
+      // @ts-ignore
+      if (tooltip && tooltip._active.length > 0) {
+        const xPos = scales.x.getPixelForValue(tooltip.dataPoints[0].dataIndex)
+        const yPos = scales.y.getPixelForValue(tooltip.dataPoints[0].parsed.y)
+
+        ctx.save()
+        ctx.beginPath()
+        ctx.lineWidth = 1
+        ctx.strokeStyle = "hsl(274, 69%, 80%)"
+        ctx.moveTo(xPos, yPos)
+        ctx.setLineDash([6,4])
+        ctx.lineTo(xPos, chartArea.bottom)
+        ctx.stroke()
+        ctx.closePath()
+        ctx.setLineDash([])
+      }
+    },
+
+  }
+
   return (
     <Chart
       type={type}
@@ -72,33 +97,35 @@ const CustomChart = ({
             ...prev,
             datasets: prev.datasets.map((dataset) => ({
               ...dataset,
-              backgroundColor: createGradient(node.ctx, node.chartArea),
-            })),
+              backgroundColor: createGradient(node.ctx, node.chartArea)
+            }))
           }))
         }
       }}
+      plugins={[hoverLine]}
       options={{
         ...options,
         responsive: true,
         scales: {
           x: {
             border: {
-              display: false,
+              display: false
             },
+
             grid: {
-              display: false,
-            },
+              display: false
+            }
           },
           y: {
             border: {
               display: false,
-              dash: [4, 8],
+              dash: [4, 8]
             },
             grid: {
-              color: "hsl(0, 0%, 20%)",
-            },
-          },
-        },
+              color: "hsl(0, 0%, 20%)"
+            }
+          }
+        }
       }}
       data={chartData}
       width={width}
