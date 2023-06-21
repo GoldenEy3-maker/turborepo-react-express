@@ -1,14 +1,13 @@
 import Button from "@/components/Button"
 import * as Form from "@/components/Form"
 import Input from "@/components/Input"
-import Notify from "@/components/Notify"
 import * as Section from "@/components/Section"
-import { useNotify } from "@/hooks/notify"
 import { InputMaskPatterns } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
 import { useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import InputMask from "react-input-mask"
+import { toast } from "react-toastify"
 import { getCookieObject, validateEmail, validateTelPattern } from "utils"
 import { CookieKeys } from "utils/enums"
 import type { AuthCookie, ValueOf } from "utils/types"
@@ -31,16 +30,6 @@ type FormState = {
 }
 
 const EdiInfoForm = () => {
-  const {
-    closeNotify,
-    showNotify,
-    notifyTitle,
-    notifyState,
-    notifyMessage,
-    notifyType,
-    notifyRef,
-  } = useNotify()
-
   const {
     handleSubmit,
     control,
@@ -65,20 +54,17 @@ const EdiInfoForm = () => {
   const updateInfoMut = trpc.user.updateInfo.useMutation({
     onSuccess(data) {
       if (data) {
-        showNotify({
-          message: data.message,
-          title: "Успешно",
+        toast(data.message, {
           type: "success",
         })
+
         setValue("newPassword", "")
         setValue("oldPassword", "")
       }
     },
     onError(error) {
-      showNotify({
-        message: error.message,
-        title: "Ошибка",
-        type: "danger",
+      toast(error.message, {
+        type: "error",
       })
     },
   })
@@ -98,15 +84,6 @@ const EdiInfoForm = () => {
 
   return (
     <Section.Root>
-      <Notify
-        ref={notifyRef}
-        state={notifyState}
-        type={notifyType}
-        title={notifyTitle}
-        closeHandler={closeNotify}
-      >
-        {notifyMessage}
-      </Notify>
       <Section.Header isCenter>
         <Section.Title>Изменить личную информацию</Section.Title>
       </Section.Header>
@@ -114,7 +91,7 @@ const EdiInfoForm = () => {
         <Form.Root
           withGroups
           onSubmit={handleSubmit((data) => {
-            closeNotify()
+            toast.dismiss()
 
             updateInfoMut.mutate(data)
           })}

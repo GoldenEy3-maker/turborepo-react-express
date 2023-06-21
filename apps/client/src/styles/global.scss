@@ -12,11 +12,6 @@
   max-width: var(--container-mw);
   padding-inline: var(--container-pgi);
   margin-inline: auto;
-  // padding-block: var(--safe-area-pd);
-
-  // &.main-layout {
-  //   padding-block: 0 var(--safe-area-pd);
-  // }
 }
 
 .page-title {
@@ -27,4 +22,8 @@
 .rich-text {
   color: hsl(var(--primary-hsl));
   font-weight: 500;
+}
+
+.Toastify__toast-icon {
+  width: auto;
 }

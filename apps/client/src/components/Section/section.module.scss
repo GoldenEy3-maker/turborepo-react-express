@@ -19,6 +19,8 @@
   justify-content: space-between;
   gap: 1rem;
 
+  padding-bottom: 1.5rem;
+
   &._center {
     justify-content: center;
   }
@@ -34,10 +36,9 @@
 }
 
 .content {
-  padding-top: 1.5rem;
 
   &._center {
-  display: grid;
+    display: grid;
     place-items: center;
   }
 }

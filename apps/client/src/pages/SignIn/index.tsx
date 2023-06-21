@@ -2,8 +2,6 @@ import Button from "@/components/Button"
 import * as Form from "@/components/Form"
 import Input from "@/components/Input"
 import Logo from "@/components/Logo"
-import Notify from "@/components/Notify"
-import { useNotify } from "@/hooks/notify"
 import { RouterPaths } from "@/utils/enums"
 import { cls } from "@/utils/helpers"
 import { trpc } from "@/utils/trpc"
@@ -11,6 +9,7 @@ import type { FC } from "react"
 import { useRef } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import type { ValueOf } from "utils/types"
 import styles from "./signIn.module.scss"
 
@@ -26,34 +25,27 @@ type FormState = {
 }
 
 const SignInPage: FC = () => {
-  const {
-    notifyRef,
-    notifyMessage,
-    notifyState,
-    notifyTitle,
-    notifyType,
-    showNotify,
-    closeNotify,
-  } = useNotify()
-
-  const navigator = useNavigate()
+  const navigate = useNavigate()
 
   const redirectionTimerIDRef = useRef<NodeJS.Timeout>()
 
   const signInMut = trpc.auth.signIn.useMutation({
     onSuccess() {
-      showNotify({
-        message: "Скоро вас направит на главную страницу.",
-        title: "Авторизация прошла успешно!",
-        type: "success",
-      })
+      toast(
+        "Авторизация прошла успешно! Скоро вас направит на главную страницу",
+        {
+          type: "success",
+        }
+      )
 
       redirectionTimerIDRef.current = setTimeout(() => {
-        navigator(RouterPaths.HomePage)
+        navigate(RouterPaths.HomePage)
       }, 5000)
     },
     onError(error) {
-      showNotify({ message: error.message, title: "Ошибка!", type: "danger" })
+      toast(error.message, {
+        type: "error",
+      })
     },
   })
 
@@ -71,22 +63,13 @@ const SignInPage: FC = () => {
 
   return (
     <>
-      <Notify
-        ref={notifyRef}
-        state={notifyState}
-        title={notifyTitle}
-        type={notifyType}
-        closeHandler={closeNotify}
-      >
-        {notifyMessage}
-      </Notify>
       <Logo isMinimized={true} />
       <h1 className={cls([styles.title, "page-title _centered"])}>
         Авторизация
       </h1>
       <Form.Root
         onSubmit={handleSubmit((data) => {
-          closeNotify()
+          toast.dismiss()
 
           signInMut.mutate(data)
         })}

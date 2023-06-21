@@ -3,15 +3,13 @@ import * as Form from "@/components/Form"
 import Input from "@/components/Input"
 import Logo from "@/components/Logo"
 import * as Tabs from "@/components/Tabs"
-import { useNotify } from "@/hooks/notify"
 import { InputMaskPatterns, PageQueryKeys, RouterPaths } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
-
-import Notify from "@/components/Notify"
 import type { FC } from "react"
 import { Controller, useForm } from "react-hook-form"
 import InputMask from "react-input-mask"
 import { Link, useLocation } from "react-router-dom"
+import { toast } from "react-toastify"
 import { dateDiff, formatDate, validateDatePattern } from "utils"
 import type { ValueOf } from "utils/types"
 import styles from "./signUp.module.scss"
@@ -42,16 +40,6 @@ const RoleTabKeys = {
 type RoleTabKeys = ValueOf<typeof RoleTabKeys>
 
 const SignUpPage: FC = () => {
-  const {
-    closeNotify,
-    showNotify,
-    notifyState,
-    notifyRef,
-    notifyTitle,
-    notifyMessage,
-    notifyType,
-  } = useNotify()
-
   const location = useLocation()
 
   const [queryKey, queryValue] = location.search.replace("?", "").split("=")
@@ -69,14 +57,16 @@ const SignUpPage: FC = () => {
 
   const signUpMut = trpc.auth.signUp.useMutation({
     onError(error) {
-      showNotify({ message: error.message, title: "Ошибка!", type: "danger" })
+      toast(error.message, { type: "error" })
     },
     onSuccess() {
-      showNotify({
-        title: "Регистрация прошла успешно!",
-        message: "Теперь вы можете авторизоваться по ссылке ниже!",
-        type: "success",
-      })
+      toast(
+        <p>
+          Регистрация прошла успешно! Теперь вы можете
+          <Link to={RouterPaths.SignInPage}> авторизоваться</Link>!
+        </p>,
+        { type: "success" }
+      )
 
       reset()
     },
@@ -104,21 +94,12 @@ const SignUpPage: FC = () => {
 
   return (
     <>
-      <Notify
-        ref={notifyRef}
-        state={notifyState}
-        title={notifyTitle}
-        type={notifyType}
-        closeHandler={closeNotify}
-      >
-        {notifyMessage}
-      </Notify>
       <Logo isMinimized={true} />
       <h1 className="page-title _centered">Регистрация</h1>
 
       <Form.Root
         onSubmit={handleSubmit((data) => {
-          closeNotify()
+          toast.dismiss()
 
           signUpMut.mutate({ ...data, birthDate: formatDate(data.birthDate) })
         })}

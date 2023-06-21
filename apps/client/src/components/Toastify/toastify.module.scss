@@ -1,0 +1,49 @@
+.toast {
+  background-color: hsl(var(--surface-container-hsl));
+  border-radius: var(--medium-shape);
+}
+
+.progress {
+  background-color: hsl(var(--primary-hsl));
+
+  ._success & {
+    background-color: hsl(var(--success-hsl));
+  }
+
+  ._danger & {
+    background-color: hsl(var(--danger-hsl));
+  }
+
+  ._warning & {
+    background-color: hsl(var(--warning-hsl));
+  }
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  svg {
+    fill: hsl(var(--primary-hsl));
+
+    ._success & {
+      fill: hsl(var(--success-hsl));
+    }
+
+    ._danger & {
+      fill: hsl(var(--danger-hsl));
+    }
+
+    ._warning & {
+      fill: hsl(var(--warning-hsl));
+    }
+  }
+
+
+}
+
+
+

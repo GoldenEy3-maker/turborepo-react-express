@@ -1,42 +1,27 @@
 import ImageUploader from "@/components/ImageUploader"
-import Notify from "@/components/Notify"
 import { useFileReader } from "@/hooks/fileReader"
-import { useNotify } from "@/hooks/notify"
 import { trpc } from "@/utils/trpc"
 import type { Role } from "@prisma/client"
+import { toast } from "react-toastify"
 import { getCookieObject } from "utils"
 import { CookieKeys } from "utils/enums"
 import type { AuthCookie } from "utils/types"
 import styles from "./infoSidebar.module.scss"
 
 const InfoSidebar = () => {
-  const {
-    closeNotify,
-    showNotify,
-    notifyMessage,
-    notifyRef,
-    notifyState,
-    notifyTitle,
-    notifyType,
-  } = useNotify()
-
   const { isLoading, previews, readFiles, reset } = useFileReader()
 
   const uploadAvatarMut = trpc.user.uploadAvatar.useMutation({
     onSuccess() {
-      showNotify({
-        title: "Успешно",
-        message: "Ваш аватар успешно обновлен!",
+      toast("Ваш аватар успешно обновлен!", {
         type: "success",
       })
 
       reset()
     },
     onError(error) {
-      showNotify({
-        title: "Ошибка",
-        message: error.message,
-        type: "danger",
+      toast(error.message, {
+        type: "error",
       })
     },
   })
@@ -58,29 +43,21 @@ const InfoSidebar = () => {
 
   return (
     <>
-      <Notify
-        ref={notifyRef}
-        state={notifyState}
-        title={notifyTitle}
-        type={notifyType}
-        closeHandler={closeNotify}
-      >
-        {notifyMessage}
-      </Notify>
       <aside className={styles.sidebar}>
         <ImageUploader
           className={styles.uploader}
           previews={previews}
           disabled={isLoading || uploadAvatarMut.isLoading}
           reset={reset}
-          onSubmit={() =>
-            previews &&
-            previews[0] &&
-            uploadAvatarMut.mutate({
-              base64: previews[0].base64,
-              name: previews[0].name,
-            })
-          }
+          onSubmit={() => {
+            toast.dismiss()
+
+            if (previews && previews[0])
+              uploadAvatarMut.mutate({
+                base64: previews[0].base64,
+                name: previews[0].name,
+              })
+          }}
           currentImage={authCookie?.photo ?? undefined}
           id="file"
           name="file"

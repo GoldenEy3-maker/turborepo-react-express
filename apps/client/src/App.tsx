@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useTrpcClient } from "./hooks/trpcClient"
 import { RouterPaths } from "./utils/enums"
 import { trpc } from "./utils/trpc"
+import Toastify from "@/components/Toastify"
 
 const MainLayout = lazy(() => import("./layouts/Main"))
 const AuthLayout = lazy(() => import("./layouts/Auth"))
@@ -21,19 +22,20 @@ const App = () => {
         <BrowserRouter>
           <div className="wrapper">
             <Routes>
-              <Route element={<MainLayout/>}>
-                <Route index element={<HomePage/>}/>
+              <Route element={<MainLayout />}>
+                <Route index element={<HomePage />} />
                 <Route
                   path={RouterPaths.ProfilePage}
-                  element={<ProfilePage/>}
+                  element={<ProfilePage />}
                 />
               </Route>
-              <Route element={<AuthLayout/>}>
-                <Route path={RouterPaths.SignInPage} element={<SignInPage/>}/>
-                <Route path={RouterPaths.SignUpPage} element={<SignUpPage/>}/>
+              <Route element={<AuthLayout />}>
+                <Route path={RouterPaths.SignInPage} element={<SignInPage />} />
+                <Route path={RouterPaths.SignUpPage} element={<SignUpPage />} />
               </Route>
             </Routes>
           </div>
+          <Toastify />
         </BrowserRouter>
       </QueryClientProvider>
     </trpc.Provider>
