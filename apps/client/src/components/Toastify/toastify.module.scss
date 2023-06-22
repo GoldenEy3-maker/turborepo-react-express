@@ -3,6 +3,39 @@
   border-radius: var(--medium-shape);
 }
 
+.body {
+  position: relative;
+
+  padding-left: 1rem;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    border-radius: 40px;
+
+    background-color: hsl(var(--primary-hsl));
+
+    ._success & {
+      background-color: hsl(var(--success-hsl));
+    }
+
+    ._danger & {
+      background-color: hsl(var(--danger-hsl));
+    }
+
+    ._warning & {
+      background-color: hsl(var(--warning-hsl));
+    }
+  }
+}
+
 .progress {
   background-color: hsl(var(--primary-hsl));
 
@@ -41,9 +74,4 @@
       fill: hsl(var(--warning-hsl));
     }
   }
-
-
 }
-
-
-

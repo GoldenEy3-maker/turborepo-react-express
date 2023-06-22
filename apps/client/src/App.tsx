@@ -1,10 +1,10 @@
+import Toastify from "@/components/Toastify"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { lazy } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useTrpcClient } from "./hooks/trpcClient"
 import { RouterPaths } from "./utils/enums"
 import { trpc } from "./utils/trpc"
-import Toastify from "@/components/Toastify"
 
 const MainLayout = lazy(() => import("./layouts/Main"))
 const AuthLayout = lazy(() => import("./layouts/Auth"))

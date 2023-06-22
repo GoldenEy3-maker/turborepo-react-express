@@ -30,6 +30,7 @@
   position: absolute;
   top: 100%;
   right: 0;
+  z-index: 2;
 
   min-width: 100%;
 
@@ -69,7 +70,6 @@
 
       background-color: hsl(274, 15%, 25%);
     }
-
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {

@@ -1,29 +1,122 @@
 import CustomChart from "@/components/Chart"
-import { getDaysInCurrentMonth, getRandomNumber } from "@/utils/helpers"
-import styles from "@/pages/Home/home.module.scss"
 import * as Section from "@/components/Section"
 import * as Select from "@/components/Select"
+import {
+  getDaysInCurrentMonth,
+  getMonths,
+  getRandomNumber,
+} from "@/utils/helpers"
+import type {
+  ActiveElement,
+  ChartEvent,
+  Chart as ChartType,
+  TooltipModel,
+} from "chart.js"
+import { ru } from "date-fns/locale"
 import { useState } from "react"
 import type { ValueOf } from "utils/types"
+import styles from "./chart.module.scss"
 
 const TypeSelectValues = {
   Orders: "Заказов",
   Views: "Просмотров",
-  Activity: "Активности"
+  Activity: "Активности",
 } as const
 
 type TypeSelectValues = ValueOf<typeof TypeSelectValues>
 
 const SortSelectValues = {
   Month: "Месяц",
-  Year: "Год"
+  Year: "Год",
 } as const
 
 type SortSelectValues = ValueOf<typeof SortSelectValues>
 
 const Chart = () => {
-  const [typeSelectState, setTypeSelectState] = useState<TypeSelectValues>("Заказов")
-  const [sortSelectState, setSortSelectState] = useState<SortSelectValues>("Месяц")
+  const [typeSelectState, setTypeSelectState] =
+    useState<TypeSelectValues>("Заказов")
+  const [sortSelectState, setSortSelectState] =
+    useState<SortSelectValues>("Месяц")
+
+  const externalTooltipHandler = (context: {
+    chart: ChartType<"line">
+    tooltip: TooltipModel<"line">
+  }) => {
+    const { chart, tooltip } = context
+
+    let tooltipEl = chart.canvas.parentNode?.querySelector("div")
+
+    if (!tooltipEl) {
+      tooltipEl = document.createElement("div")
+      tooltipEl.classList.add(styles.tooltip)
+      chart.canvas.parentNode?.appendChild(tooltipEl)
+    }
+
+    if (tooltip.opacity === 0) {
+      tooltipEl.style.opacity = "0"
+      return
+    }
+
+    if (tooltip.body) {
+      const titleLines = tooltip.title || []
+      const bodyLines = tooltip.body.map((b) => b.lines)
+
+      const h5 = document.createElement("h5")
+      h5.classList.add(styles.title)
+
+      for (const title of titleLines) {
+        const text = document.createTextNode(title)
+        h5.appendChild(text)
+      }
+
+      const content = document.createElement("div")
+      content.classList.add(styles.content)
+
+      for (const body of bodyLines) {
+        const p = document.createElement("p")
+        const text = document.createTextNode(body[0])
+        p.appendChild(text)
+        content.appendChild(p)
+      }
+
+      while (tooltipEl?.firstChild) {
+        tooltipEl.firstChild.remove()
+      }
+
+      tooltipEl?.appendChild(h5)
+      tooltipEl?.appendChild(content)
+    }
+
+    const { offsetLeft, offsetTop } = chart.canvas
+
+    tooltipEl.style.opacity = "1"
+    tooltipEl.style.left = offsetLeft + tooltip.caretX + "px"
+    tooltipEl.style.top = offsetTop + tooltip.caretY + "px"
+  }
+
+  const highlightActiveLabelOnHover = (
+    event: ChartEvent,
+    elements: ActiveElement[],
+    chart: ChartType<"line">
+  ) => {
+    const colors = []
+
+    if (elements[0] && chart.data.labels) {
+      const datapoint = elements[0].index
+
+      for (const label in chart.data.labels) {
+        if (datapoint === parseInt(label)) {
+          colors.push("hsl(274, 69%, 80%)")
+        } else {
+          colors.push("hsla(0, 0%, 40%)")
+        }
+      }
+
+      chart.config.options!.scales!.x!.ticks!.color = colors
+
+      chart.update()
+    }
+  }
 
   return (
     <Section.Root className={styles.chart}>
@@ -32,14 +125,18 @@ const Chart = () => {
           <span>Аналитика</span>
           <Select.Root>
             <Select.Trigger value={typeSelectState} />
-            <Select.Options values={Object.values(TypeSelectValues)}
-              handler={(value) => setTypeSelectState(value as TypeSelectValues)} />
+            <Select.Options
+              values={Object.values(TypeSelectValues)}
+              handler={(value) => setTypeSelectState(value as TypeSelectValues)}
+            />
           </Select.Root>
         </Section.Title>
         <Select.Root>
           <Select.Trigger value={sortSelectState} />
-          <Select.Options values={Object.values(SortSelectValues)}
-            handler={(value) => setSortSelectState(value as SortSelectValues)} />
+          <Select.Options
+            values={Object.values(SortSelectValues)}
+            handler={(value) => setSortSelectState(value as SortSelectValues)}
+          />
         </Select.Root>
       </Section.Header>
       <Section.Content>
@@ -47,51 +144,70 @@ const Chart = () => {
           key={crypto.randomUUID()}
           type="line"
           data={{
-            labels: getDaysInCurrentMonth(),
+            labels:
+              sortSelectState === "Месяц"
+                ? getDaysInCurrentMonth()
+                : getMonths(),
             datasets: [
               {
                 fill: true,
-                label: "Продажи",
-                data: getDaysInCurrentMonth().map(() =>
-                  getRandomNumber(50000, 100000)
-                ),
-                borderColor: "hsl(274, 69%, 80%)"
-              }
-            ]
+                data: (sortSelectState === "Месяц"
+                  ? getDaysInCurrentMonth()
+                  : getMonths()
+                ).map(() => getRandomNumber(50000, 100000)),
+                borderColor: "hsl(274, 69%, 80%)",
+              },
+            ],
           }}
           gradiant={{
             top: {
               offset: 0.6,
-              color: "hsla(274, 69%, 80%, .2)"
+              color: "hsla(274, 69%, 80%, .2)",
             },
             bottom: {
               offset: 1,
-              color: "hsl(0, 0%, 100%, 0)"
-            }
+              color: "hsl(0, 0%, 100%, 0)",
+            },
           }}
           width={1000}
           height={300}
           options={{
-            onHover(event, elements, chart) {
-              const colors = []
-
-              if (elements[0]) {
-                const datapoint = elements[0].index
-
-                for (const label of chart.data.labels!) {
-                  if (datapoint + 1 === label) {
-                    colors.push("hsl(274, 69%, 80%)")
-                  } else {
-                    colors.push("hsla(0, 0%, 40%)")
-                  }
-                }
-
-                chart.config.options!.scales!.x!.ticks!.color = colors
-
-                chart.update()
-
-              }
+            responsive: true,
+            scales: {
+              x: {
+                type: "time",
+                time: {
+                  displayFormats: {
+                    day: "dd",
+                    month: "MMMM",
+                  },
+                  unit: sortSelectState === "Месяц" ? "day" : "month",
+                  tooltipFormat:
+                    sortSelectState === "Месяц" ? "dd MMMM yyyy" : "MMMM yyyy",
+                },
+                adapters: {
+                  date: {
+                    locale: ru,
+                  },
+                },
+                border: {
+                  display: false,
+                },
+                grid: {
+                  display: false,
+                },
+              },
+              y: {
+                border: {
+                  display: false,
+                  dash: [4, 8],
+                },
+                grid: {
+                  color: "hsl(0, 0%, 20%)",
+                },
+              },
             },
+            onHover: highlightActiveLabelOnHover,
             elements: {
               point: {
                 radius: 0,
@@ -99,20 +215,23 @@ const Chart = () => {
                 hoverBorderColor: "hsl(274, 69%, 80%)",
                 hoverBorderWidth: 3,
                 hoverBackgroundColor: "#fff",
-                hoverRadius: 8
+                hoverRadius: 8,
               },
-              line: {
-                tension: 0.4
-              }
             },
             interaction: {
-              intersect: false
-            }
+              intersect: false,
+            },
+            plugins: {
+              tooltip: {
+                enabled: false,
+                position: "nearest",
+                external: externalTooltipHandler,
+              },
+            },
           }}
         />
       </Section.Content>
     </Section.Root>
-
   )
 }
 
