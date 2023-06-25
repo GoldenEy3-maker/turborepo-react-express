@@ -26,6 +26,8 @@
 
   svg {
     fill: hsla(var(--_clr));
+
+    transition: 200ms ease;
   }
 
   &._icon {
@@ -140,6 +142,7 @@
 
   &:focus-visible {
     --_bg-clr: 274, 15%, 25%;
+    --_clr: var(--primary-hsl);
 
     outline: none;
 
@@ -191,6 +194,7 @@
   @media (hover: hover) and (pointer: fine) {
     &:hover:not(:disabled) {
       --_bg-clr: 274, 15%, 30%;
+      --_clr: var(--primary-hsl);
 
       &._danger {
         --_bg-clr: 0, 15%, 30%;

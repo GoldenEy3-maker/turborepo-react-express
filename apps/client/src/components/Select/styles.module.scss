@@ -1,7 +1,13 @@
 .root {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
 
   font-size: var(--body-l-fs);
+}
+
+.wrapper {
+  position: relative;
 }
 
 .trigger {
@@ -41,9 +47,12 @@
 
   max-width: 15em;
 
-  background-color: hsl(var(--surface-container-hsl));
+  // background-color: hsl(var(--surface-container-hsl));
+  background-color: hsl(0, 0%, 14%);
 
   overflow: hidden;
+
+  // box-shadow: 0 5px 10px hsla(var(--background-hsl), 0.25);
 
   transition: 200ms ease;
 

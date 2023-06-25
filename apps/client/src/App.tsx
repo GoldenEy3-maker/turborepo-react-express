@@ -12,6 +12,7 @@ const HomePage = lazy(() => import("./pages/Home"))
 const ProfilePage = lazy(() => import("./pages/Profile"))
 const SignInPage = lazy(() => import("./pages/SignIn"))
 const SignUpPage = lazy(() => import("./pages/SignUp"))
+const OrdersPage = lazy(() => import("./pages/Orders"))
 
 const App = () => {
   const { trpcClient, queryClient } = useTrpcClient()
@@ -28,6 +29,7 @@ const App = () => {
                   path={RouterPaths.ProfilePage}
                   element={<ProfilePage />}
                 />
+                <Route path={RouterPaths.OrdersPage} element={<OrdersPage />} />
               </Route>
               <Route element={<AuthLayout />}>
                 <Route path={RouterPaths.SignInPage} element={<SignInPage />} />

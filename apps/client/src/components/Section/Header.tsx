@@ -1,6 +1,6 @@
 import { cls } from "@/utils/helpers"
 import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
-import styles from "./section.module.scss"
+import styles from "./styles.module.scss"
 
 type HeaderProps = {
   isCenter?: boolean

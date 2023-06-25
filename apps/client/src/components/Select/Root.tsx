@@ -1,10 +1,18 @@
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
-import styles from "./select.module.scss"
+import {
+  SelectContext,
+  type SelectContextState,
+} from "@/components/Select/context.tsx"
 import { cls } from "@/utils/helpers.ts"
-import { SelectContext, type SelectContextState } from "@/components/Select/context.tsx"
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import { useEffect, useRef, useState } from "react"
+import styles from "./styles.module.scss"
 
-export const Root: FC<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> = ({
+type RootProps = {
+  label?: string
+} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+
+export const Root: FC<RootProps> = ({
+  label,
   className,
   children,
   ...props
@@ -13,12 +21,12 @@ export const Root: FC<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivE
 
   const [contextState, setContextState] = useState<SelectContextState>({
     isOpen: false,
-    triggerRef: { current: null }
+    triggerRef: { current: null },
   })
 
   const clickDocumentHandler = (event: MouseEvent) => {
     if (!rootRef.current?.contains(event.target as HTMLElement)) {
-      setContextState(state => ({ ...state, isOpen: false }))
+      setContextState((state) => ({ ...state, isOpen: false }))
     }
   }
 
@@ -30,14 +38,27 @@ export const Root: FC<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivE
 
   return (
     <SelectContext.Provider value={[contextState, setContextState]}>
-      <div ref={rootRef} className={cls([className, styles.root], {
-        [styles._active]: contextState.isOpen
-      })} onBlur={(event) => {
-        if (!rootRef.current?.contains(event.relatedTarget as HTMLElement)) {
-          setContextState(state => ({ ...state, isOpen: false }))
-        }
-      }} {...props}>{children}</div>
+      <div
+        className={cls([className, styles.root], {
+          [styles._active]: contextState.isOpen,
+        })}
+        {...props}
+      >
+        {label ? <span className={styles.label}>{label}</span> : null}
+        <div
+          className={styles.wrapper}
+          ref={rootRef}
+          onBlur={(event) => {
+            if (
+              !rootRef.current?.contains(event.relatedTarget as HTMLElement)
+            ) {
+              setContextState((state) => ({ ...state, isOpen: false }))
+            }
+          }}
+        >
+          {children}
+        </div>
+      </div>
     </SelectContext.Provider>
   )
 }
-

@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  align-items: center;
+
+  gap: 1em;
+}
+
+.filter {
+  --_clr: var(--on-background-hsl);
+}
+
+.sort {
+  margin-left: auto;
+}

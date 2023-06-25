@@ -131,7 +131,7 @@ const Chart = () => {
             />
           </Select.Root>
         </Section.Title>
-        <Select.Root>
+        <Select.Root label="Промежуток:">
           <Select.Trigger value={sortSelectState} />
           <Select.Options
             values={Object.values(SortSelectValues)}

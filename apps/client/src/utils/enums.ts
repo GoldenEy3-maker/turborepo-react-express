@@ -4,7 +4,8 @@ export const RouterPaths = {
   HomePage: "/",
   SignInPage: "/sign-in",
   SignUpPage: "/sign-up",
-  ProfilePage: "/profile"
+  ProfilePage: "/profile",
+  OrdersPage: "/orders"
 } as const
 
 export const InputMaskPatterns = {

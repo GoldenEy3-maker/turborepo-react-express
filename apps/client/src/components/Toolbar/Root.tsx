@@ -2,12 +2,12 @@ import { cls } from "@/utils/helpers"
 import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./styles.module.scss"
 
-export const Title: FC<
-  DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
+export const Root: FC<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 > = ({ className, children, ...props }) => {
   return (
-    <h3 className={cls([className, styles.title])} {...props}>
+    <div className={cls([className, styles.root])} {...props}>
       {children}
-    </h3>
+    </div>
   )
 }

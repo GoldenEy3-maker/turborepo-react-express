@@ -8,7 +8,7 @@
   --_add-inline-padding: 0.3rem;
   --_padding-bottom: 0.6rem;
 
-  max-width: 18rem;
+  max-width: 20em;
 
   label {
     position: absolute;
@@ -45,14 +45,14 @@
   &._withLeading {
     --_padding-left: calc(
       var(--_icons-padding-inner) + var(--_icons-padding-outer) +
-      var(--_icons-size) + var(--_add-inline-padding)
+        var(--_icons-size) + var(--_add-inline-padding)
     );
   }
 
   &._withTrailing {
     --_padding-right: calc(
       var(--_icons-padding-inner) + var(--_icons-padding-outer) +
-      var(--_icons-size) + var(--_add-inline-padding)
+        var(--_icons-size) + var(--_add-inline-padding)
     );
   }
 
