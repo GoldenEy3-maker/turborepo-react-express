@@ -35,10 +35,13 @@
 .options {
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 50%;
   z-index: 2;
 
-  min-width: 100%;
+  min-width: 10em;
+
+  display: grid;
+  gap: 0.3rem;
 
   opacity: 0;
   visibility: hidden;
@@ -47,12 +50,13 @@
 
   max-width: 15em;
 
-  // background-color: hsl(var(--surface-container-hsl));
-  background-color: hsl(0, 0%, 14%);
+  padding: 0.5rem 0.3rem;
+
+  background-color: hsl(var(--surface-container-high-hsl));
 
   overflow: hidden;
 
-  // box-shadow: 0 5px 10px hsla(var(--background-hsl), 0.25);
+  transform: translateX(-50%);
 
   transition: 200ms ease;
 
@@ -66,29 +70,32 @@
     justify-content: center;
     gap: 0.5rem;
 
+    border-radius: var(--small-shape);
+
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
 
     transition: 200ms ease;
 
     &:focus {
       outline: none;
 
-      background-color: hsl(274, 15%, 25%);
+      background-color: hsl(var(--primary-container-high-hsl));
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: hsl(274, 15%, 30%);
+        background-color: hsl(var(--primary-container-highest-hsl));
       }
     }
   }
 
   ._active & {
     top: 120%;
+    z-index: 15;
 
     opacity: 1;
     visibility: visible;

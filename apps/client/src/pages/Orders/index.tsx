@@ -1,21 +1,44 @@
-import OrderItem from "@/components/OrderItem"
 import * as Section from "@/components/Section"
-import * as Toolbar from "@/components/Toolbar"
-import { useState } from "react"
-import type { ValueOf } from "utils/types"
-import styles from "./styles.module.scss"
-
-const SortValues = {
-  Price: "Цена",
-  Date: "Дата",
-  Popular: "Популярность",
-} as const
-
-type SortValues = ValueOf<typeof SortValues>
+// import { trpc } from "@/utils/trpc"
+// import { useEffect } from "react"
+import OrderList from "./components/List"
+import OrdersToolbar from "./components/Toolbar"
 
 const OrdersPage = () => {
-  const [searchValue, setSearchValue] = useState("")
-  const [sortValue, setSortValue] = useState<SortValues>("Дата")
+  // const orderCreateMut = trpc.order.create.useMutation()
+
+  // useEffect(() => {
+  //   orderCreateMut.mutate({
+  //     title:
+  //       "Доработать простую программу(php, js): изменить аккаунт, восстановить пароль, привяка оплаты и т.п.",
+  //     description: `
+  //     <p>AS IS: Есть простое приложение (php + js).
+  //     Реализована функция логина и регистрации пользователя с подтверждением по мейлу либо входа как гостя.
+  //     Пришлю вам сокращенную версию, сможете быстро вникнуть в код.
+  //     Пользователей сохраняем в БД.
+  //     Пользователь переходит в приложение и работает с данными: открывает/сохраняет их в JSONе – либо локально на компьютере, либо в папке на сервере.</p>
+  //     <br/>
+  //     <strong>TO BE:</strong>
+  //     <p>
+  //     Добавить совершенно стандартный для таких случаев функционал:
+  //       <ol>
+  //         <li>Восстановление пароля по мейлу;</li>
+  //         <li>Удаление и изменение аккаунта (поменять логин/пароль/мейл);</li>
+  //         <li>Работа с фалом: перезаписать текущий JSON в т.ч. локально на компьютер в папку из которой он открыт, показать последние открытые файлы;</li>
+  //         <li>Защита кода (тут нужно обсудить варианты, что-то более интересное чем просто обсфуркация);</li>
+  //         <li>Оплата (платежную систему пока подключать не нужно, но нужно сделать задел на будущее);</li>
+  //       </ol>
+  //     </p>
+  //     <br />
+  //     <p>
+  //     Не обязательно оценивать всё сразу, можем разбить на отдельные задачи, принимать и оплачивать также по отдельности.
+  //     Можем работать через безопасную сделку или напрямую.
+  //     </p>
+  //     `,
+  //     tags: ["php", "js"],
+  //     verified: false,
+  //   })
+  // }, [])
 
   return (
     <main>
@@ -23,96 +46,9 @@ const OrdersPage = () => {
         <Section.Header>
           <Section.Title>Заказы</Section.Title>
         </Section.Header>
-        <Toolbar.Root>
-          <Toolbar.Search
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-          <Toolbar.Sort
-            label="Сортировать по:"
-            handler={(value) => setSortValue(value as SortValues)}
-            value={sortValue}
-            values={Object.values(SortValues)}
-          />
-          <Toolbar.Filter></Toolbar.Filter>
-        </Toolbar.Root>
+        <OrdersToolbar />
         <Section.Content>
-          <div className={styles.list}>
-            <OrderItem
-              id="1"
-              title="Доработки сайта на React, фронт + бэк NestJS"
-              description={
-                <>
-                  <p>
-                    1. Поправить кнопку и голову персонажа (сейчас они
-                    обрезаны).
-                    <br />
-                    2. Криво открывается ссылка подтверждения email из письма
-                    после регистрации. <br />
-                    3. Вместо формы регистрации после авторизации добавить
-                    кнопку оплаты обучения которая будет перекидывать на
-                    страницу оплаты &nbsp;
-                    <a href="#">max-tax.fun/payment</a> . –{" "}
-                    <a href="#">disk.yandex.ru/i/j6voEoBX</a>
-                  </p>
-                  <p>
-                    1. Поправить кнопку и голову персонажа (сейчас они
-                    обрезаны).
-                    <br />
-                    2. Криво открывается ссылка подтверждения email из письма
-                    после регистрации. <br />
-                    3. Вместо формы регистрации после авторизации добавить
-                    кнопку оплаты обучения которая будет перекидывать на
-                    страницу оплаты &nbsp;
-                    <a href="#">max-tax.fun/payment</a> . –{" "}
-                    <a href="#">disk.yandex.ru/i/j6voEoBX</a>...
-                  </p>
-                </>
-              }
-              clicks={2}
-              date={new Date("2023-06-23 14:39:00")}
-              price="По договоренности"
-              verified={true}
-              views={20}
-            />
-            <OrderItem
-              id="1"
-              title="Доработки сайта на React, фронт + бэк NestJS"
-              description={
-                <>
-                  <p>
-                    1. Поправить кнопку и голову персонажа (сейчас они
-                    обрезаны).
-                    <br />
-                    2. Криво открывается ссылка подтверждения email из письма
-                    после регистрации. <br />
-                    3. Вместо формы регистрации после авторизации добавить
-                    кнопку оплаты обучения которая будет перекидывать на
-                    страницу оплаты &nbsp;
-                    <a href="#">max-tax.fun/payment</a> . –{" "}
-                    <a href="#">disk.yandex.ru/i/j6voEoBX</a>
-                  </p>
-                  <p>
-                    1. Поправить кнопку и голову персонажа (сейчас они
-                    обрезаны).
-                    <br />
-                    2. Криво открывается ссылка подтверждения email из письма
-                    после регистрации. <br />
-                    3. Вместо формы регистрации после авторизации добавить
-                    кнопку оплаты обучения которая будет перекидывать на
-                    страницу оплаты &nbsp;
-                    <a href="#">max-tax.fun/payment</a> . –{" "}
-                    <a href="#">disk.yandex.ru/i/j6voEoBX</a>...
-                  </p>
-                </>
-              }
-              clicks={5}
-              date={new Date("2023-05-23 14:39:00")}
-              price={12000}
-              verified={false}
-              views={20}
-            />
-          </div>
+          <OrderList />
         </Section.Content>
       </Section.Root>
     </main>

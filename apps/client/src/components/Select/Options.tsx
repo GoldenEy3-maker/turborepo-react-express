@@ -1,5 +1,5 @@
 import { useSelectContext } from "@/components/Select/context.tsx"
-import { useRippleEffect } from "@/hooks/rippleEffect.ts"
+import { useRippleEffect } from "@/hooks/rippleEffect.hook"
 import { cls } from "@/utils/helpers.ts"
 import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./styles.module.scss"

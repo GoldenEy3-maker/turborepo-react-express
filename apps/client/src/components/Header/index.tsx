@@ -1,11 +1,9 @@
-import { FC } from "react"
-import { getCookieObject } from "utils"
-import { CookieKeys } from "utils/enums"
-import type { AuthCookie } from "utils/types"
-import styles from "./header.module.scss"
+import { useAuthStore } from "@/store/auth"
+import type { FC } from "react"
+import styles from "./styles.module.scss"
 
 const Header: FC = () => {
-  const authCookie = getCookieObject<AuthCookie>(CookieKeys.AuthToken)
+  const user = useAuthStore((state) => state.user)
 
   const getGreetings = () => {
     const currentHour = new Date().getHours()
@@ -24,8 +22,7 @@ const Header: FC = () => {
   return (
     <header className={styles.header}>
       <h1 className="page-title">
-        {getGreetings()},{" "}
-        <span className="rich-text">{authCookie?.firstName}</span>!
+        {getGreetings()}, <span className="rich-text">{user?.firstName}</span>!
       </h1>
     </header>
   )

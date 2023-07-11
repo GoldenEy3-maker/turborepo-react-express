@@ -11,8 +11,8 @@ const Logo: FC<LogoProps> = ({ className, isMinimized, ...props }) => {
     <div className={cls([className, styles.logo])} {...props}>
       <span>
         <svg
-          width="48"
-          height="48"
+          width="3em"
+          height="3em"
           viewBox="0 0 48 48"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

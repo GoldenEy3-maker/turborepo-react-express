@@ -1,5 +1,4 @@
-import Button from "@/components/Button"
-import { ToastContainer, type TypeOptions } from "react-toastify"
+import { Slide, ToastContainer, type TypeOptions } from "react-toastify"
 import "react-toastify/dist/ReactToastify.min.css"
 import styles from "./toastify.module.scss"
 
@@ -53,14 +52,6 @@ const Toastify = () => {
     }
   }
 
-  const getButtonClrType = (type: TypeOptions) => {
-    if (type === "info" || type === "default") return
-
-    if (type === "error") return "danger" as const
-
-    return type
-  }
-
   const getClassType = (type: TypeOptions | undefined): string => {
     switch (type) {
       case "success":
@@ -76,12 +67,14 @@ const Toastify = () => {
 
   return (
     <ToastContainer
-      position="bottom-right"
+      position="top-right"
       limit={3}
       theme="dark"
+      transition={Slide}
       icon={({ type }) => (
         <span className={styles.icon}>{renderIcon(type)}</span>
       )}
+      hideProgressBar
       toastClassName={(props) =>
         props?.defaultClassName +
         " " +
@@ -90,21 +83,7 @@ const Toastify = () => {
         getClassType(props?.type)
       }
       bodyClassName={styles.body}
-      progressClassName={styles.progress}
-      closeButton={({ closeToast, type }) => (
-        <div className={styles.close}>
-          <Button isIcon onClick={closeToast} clrType={getButtonClrType(type)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="1.5em"
-              viewBox="0 -960 960 960"
-              width="1.5em"
-            >
-              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-            </svg>
-          </Button>
-        </div>
-      )}
+      closeButton={false}
     />
   )
 }

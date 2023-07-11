@@ -1,6 +1,6 @@
 import { cls } from "@/utils/helpers"
-import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
-import styles from "./modal.module.scss"
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import styles from "./styles.module.scss"
 
 type HeaderProps = {
   spaceBetween?: boolean

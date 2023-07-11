@@ -3,10 +3,12 @@
   align-items: center;
   gap: 1rem;
 
-  font-size: var(--display-s-fs);
-
   span {
     flex-shrink: 0;
+  }
+
+  p {
+    font-size: var(--display-s-fs);
   }
 
   b {

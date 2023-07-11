@@ -1,14 +1,14 @@
 import ImageUploader from "@/components/ImageUploader"
-import { useFileReader } from "@/hooks/fileReader"
+import { useFileReader } from "@/hooks/fileReader.hook"
+import { useAuthStore } from "@/store/auth"
 import { trpc } from "@/utils/trpc"
 import type { Role } from "@prisma/client"
 import { toast } from "react-toastify"
-import { getCookieObject } from "utils"
-import { CookieKeys } from "utils/enums"
-import type { AuthCookie } from "utils/types"
-import styles from "./infoSidebar.module.scss"
+import styles from "./styles.module.scss"
 
 const InfoSidebar = () => {
+  const user = useAuthStore((state) => state.user)
+
   const { isLoading, previews, readFiles, reset } = useFileReader()
 
   const uploadAvatarMut = trpc.user.uploadAvatar.useMutation({
@@ -25,8 +25,6 @@ const InfoSidebar = () => {
       })
     },
   })
-
-  const authCookie = getCookieObject<AuthCookie>(CookieKeys.AuthToken)
 
   const traslateRole = (role: Role) => {
     switch (role) {
@@ -58,7 +56,7 @@ const InfoSidebar = () => {
                 name: previews[0].name,
               })
           }}
-          currentImage={authCookie?.photo ?? undefined}
+          currentImage={undefined}
           id="file"
           name="file"
           onChange={async (event) => {
@@ -70,13 +68,12 @@ const InfoSidebar = () => {
           }}
         />
         <div className={styles.info}>
-          {authCookie ? (
-            <span className={styles.role}>{traslateRole(authCookie.role)}</span>
+          {user ? (
+            <span className={styles.role}>{traslateRole(user.role)}</span>
           ) : null}
-          {authCookie ? (
+          {user ? (
             <p className={styles.bio}>
-              {authCookie.lastName} {authCookie.firstName}{" "}
-              {authCookie.middleName}
+              {user.lastName} {user.firstName} {user.middleName}
             </p>
           ) : null}
         </div>

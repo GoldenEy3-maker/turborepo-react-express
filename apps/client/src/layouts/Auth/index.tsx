@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { Outlet } from "react-router-dom"
-import styles from "./authLayout.module.scss"
+import styles from "./styles.module.scss"
 
 const AuthLayout: FC = () => {
   return (

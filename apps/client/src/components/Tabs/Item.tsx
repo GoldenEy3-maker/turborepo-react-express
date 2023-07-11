@@ -1,4 +1,4 @@
-import { useRippleEffect } from "@/hooks/rippleEffect"
+import { useRippleEffect } from "@/hooks/rippleEffect.hook"
 import { cls } from "@/utils/helpers"
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react"
 import { forwardRef, useEffect, useRef } from "react"

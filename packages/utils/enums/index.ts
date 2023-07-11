@@ -1,7 +1,7 @@
-import { ValueOf } from '../types'
+import { ValueOf } from "../types/helper"
 
 export const CookieKeys = {
-  AuthToken: "auth_token"
+  RefreshToken: "jid",
 } as const
 
 export type CookieKeys = ValueOf<typeof CookieKeys>

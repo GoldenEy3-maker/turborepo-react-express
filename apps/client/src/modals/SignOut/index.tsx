@@ -1,6 +1,6 @@
 import Button from "@/components/Button"
 import * as Modal from "@/components/Modal"
-import { useModal } from "@/hooks/modal"
+import { useModal } from "@/hooks/modal.hook"
 import { RouterPaths } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
 import type { FC } from "react"
@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom"
 import { useSignOutModalStore } from "./store"
 
 const SignOutModal: FC = () => {
-  const [_, closeModal] = useModal()
+  const [, closeModal] = useModal()
   const navigate = useNavigate()
   const state = useSignOutModalStore()
-  const signOutMut = trpc.auth.signOut.useMutation({
+  const signOutMut = trpc.user.signOut.useMutation({
     onError(errors) {
       console.log(errors)
     },

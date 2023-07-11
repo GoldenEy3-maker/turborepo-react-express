@@ -1,8 +1,9 @@
 import Toastify from "@/components/Toastify"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { lazy } from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { useTrpcClient } from "./hooks/trpcClient"
+import { SkeletonTheme } from "react-loading-skeleton"
+import { Route, Routes } from "react-router-dom"
+import { useTrpcClient } from "./hooks/trpcClient.hook"
 import { RouterPaths } from "./utils/enums"
 import { trpc } from "./utils/trpc"
 
@@ -13,6 +14,8 @@ const ProfilePage = lazy(() => import("./pages/Profile"))
 const SignInPage = lazy(() => import("./pages/SignIn"))
 const SignUpPage = lazy(() => import("./pages/SignUp"))
 const OrdersPage = lazy(() => import("./pages/Orders"))
+const OrderPage = lazy(() => import("./pages/Order"))
+const ActivateAccountPage = lazy(() => import("./pages/ActiveAccount"))
 
 const App = () => {
   const { trpcClient, queryClient } = useTrpcClient()
@@ -20,7 +23,11 @@ const App = () => {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <SkeletonTheme
+          baseColor="hsl(var(--outline-hsl))"
+          highlightColor="hsl(var(--placeholder-hsl))"
+          borderRadius="var(--large-shape)"
+        >
           <div className="wrapper">
             <Routes>
               <Route element={<MainLayout />}>
@@ -30,15 +37,23 @@ const App = () => {
                   element={<ProfilePage />}
                 />
                 <Route path={RouterPaths.OrdersPage} element={<OrdersPage />} />
+                <Route
+                  path={RouterPaths.OrdersPage + "/:orderId"}
+                  element={<OrderPage />}
+                />
               </Route>
               <Route element={<AuthLayout />}>
                 <Route path={RouterPaths.SignInPage} element={<SignInPage />} />
                 <Route path={RouterPaths.SignUpPage} element={<SignUpPage />} />
+                <Route
+                  path={RouterPaths.ActivateAccountPage}
+                  element={<ActivateAccountPage />}
+                />
               </Route>
             </Routes>
           </div>
           <Toastify />
-        </BrowserRouter>
+        </SkeletonTheme>
       </QueryClientProvider>
     </trpc.Provider>
   )

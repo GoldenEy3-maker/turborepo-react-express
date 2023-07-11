@@ -1,6 +1,9 @@
+import 'dotenv/config'
 import app from "./app"
 
-app.listen(9000, () => {
-  console.log('Server is listening on port 9000!')
+const PORT = process.env.API_PORT || 9000
+
+app.listen(PORT, () => {
+  console.log(`Server is runing on port ${PORT}!`)
 })
 

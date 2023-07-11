@@ -13,7 +13,7 @@ export const Trigger: FC<
 > = ({ value, className, ...props }) => {
   const triggerRef = useRef<HTMLButtonElement>(null)
 
-  const [_, setContext] = useSelectContext()
+  const [, setContext] = useSelectContext()
 
   useEffect(() => {
     setContext((state) => ({ ...state, triggerRef }))

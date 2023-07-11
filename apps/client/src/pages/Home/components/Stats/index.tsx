@@ -1,6 +1,6 @@
-import { cls } from "@/utils/helpers"
-import styles from "./stats.module.scss"
 import * as Section from "@/components/Section"
+import { cls } from "@/utils/helpers"
+import styles from "./styles.module.scss"
 
 const Stats = () => {
   return (
@@ -11,16 +11,16 @@ const Stats = () => {
             <header className={styles.itemHeader}>
               <p className={styles.itemTitle}>Стоимость заказов</p>
               <div className={cls([styles.itemProgress, styles._danger])}>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="20"
-                viewBox="0 -960 960 960"
-                width="20"
-              >
-                <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
-              </svg>
-            </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="20"
+                    viewBox="0 -960 960 960"
+                    width="20"
+                  >
+                    <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
+                  </svg>
+                </span>
                 <p>3.0%</p>
               </div>
             </header>
@@ -32,16 +32,16 @@ const Stats = () => {
             <header className={styles.itemHeader}>
               <p className={styles.itemTitle}>Кол-во заказов</p>
               <div className={cls([styles.itemProgress, styles._success])}>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="20"
-                viewBox="0 -960 960 960"
-                width="20"
-              >
-                <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
-              </svg>
-            </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="20"
+                    viewBox="0 -960 960 960"
+                    width="20"
+                  >
+                    <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
+                  </svg>
+                </span>
                 <p>3.2%</p>
               </div>
             </header>
@@ -52,16 +52,16 @@ const Stats = () => {
             <header className={styles.itemHeader}>
               <p className={styles.itemTitle}>Личный рейтинг</p>
               <div className={cls([styles.itemProgress, styles._success])}>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="20"
-                viewBox="0 -960 960 960"
-                width="20"
-              >
-                <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
-              </svg>
-            </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="20"
+                    viewBox="0 -960 960 960"
+                    width="20"
+                  >
+                    <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
+                  </svg>
+                </span>
                 <p>10.0%</p>
               </div>
             </header>
@@ -72,16 +72,16 @@ const Stats = () => {
             <header className={styles.itemHeader}>
               <p className={styles.itemTitle}>Просмотры резюме</p>
               <div className={cls([styles.itemProgress, styles._success])}>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="20"
-                viewBox="0 -960 960 960"
-                width="20"
-              >
-                <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
-              </svg>
-            </span>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="20"
+                    viewBox="0 -960 960 960"
+                    width="20"
+                  >
+                    <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z" />
+                  </svg>
+                </span>
                 <p>8.3%</p>
               </div>
             </header>
@@ -91,7 +91,6 @@ const Stats = () => {
         </ul>
       </Section.Content>
     </Section.Root>
-
   )
 }
 

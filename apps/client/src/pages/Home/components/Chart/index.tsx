@@ -1,11 +1,7 @@
 import CustomChart from "@/components/Chart"
 import * as Section from "@/components/Section"
 import * as Select from "@/components/Select"
-import {
-  getDaysInCurrentMonth,
-  getMonths,
-  getRandomNumber,
-} from "@/utils/helpers"
+import { getRandomNumber } from "@/utils/helpers"
 import type {
   ActiveElement,
   ChartEvent,
@@ -14,8 +10,9 @@ import type {
 } from "chart.js"
 import { ru } from "date-fns/locale"
 import { useState } from "react"
-import type { ValueOf } from "utils/types"
-import styles from "./chart.module.scss"
+import { dateService } from "services"
+import type { ValueOf } from "utils/types/helper"
+import styles from "./styles.module.scss"
 
 const TypeSelectValues = {
   Orders: "Заказов",
@@ -146,14 +143,14 @@ const Chart = () => {
           data={{
             labels:
               sortSelectState === "Месяц"
-                ? getDaysInCurrentMonth()
-                : getMonths(),
+                ? dateService.getDaysOfCurrentMonth()
+                : dateService.getMonths(),
             datasets: [
               {
                 fill: true,
                 data: (sortSelectState === "Месяц"
-                  ? getDaysInCurrentMonth()
-                  : getMonths()
+                  ? dateService.getDaysOfCurrentMonth()
+                  : dateService.getMonths()
                 ).map(() => getRandomNumber(50000, 100000)),
                 borderColor: "hsl(274, 69%, 80%)",
               },

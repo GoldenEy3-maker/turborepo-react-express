@@ -1,0 +1,30 @@
+.loadingSkeleton {
+  &Container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    background-color: hsl(var(--surface-hsl));
+    padding: 2em;
+    border-radius: var(--medium-shape);
+  }
+
+  &Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  &ExtraInfo {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  &Footer {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+}

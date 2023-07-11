@@ -1,4 +1,4 @@
-import { ValueOf } from "utils/types"
+import { ValueOf } from "utils/types/helper"
 
 export const DirectoryPaths = {
   PublicClientImages: "/client/public/images/"

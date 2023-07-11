@@ -1,5 +1,5 @@
 import { cls } from "@/utils/helpers"
-import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./form.module.scss"
 
 type ActionsProps = {

@@ -1,5 +1,5 @@
 import { cls } from "@/utils/helpers"
-import { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import { TabsContextProvider } from "./context"
 import styles from "./tabs.module.scss"
 

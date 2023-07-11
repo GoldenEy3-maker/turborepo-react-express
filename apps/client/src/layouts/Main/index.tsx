@@ -1,13 +1,16 @@
 import Header from "@/components/Header"
 import Sidebar from "@/components/Sidebar"
-import { useAuthProtect } from "@/hooks/authProtect"
+import { useAuthStore } from "@/store/auth"
 import { cls } from "@/utils/helpers"
 import type { FC } from "react"
 import { Outlet } from "react-router-dom"
-import styles from "./mainLayout.module.scss"
+import { trpc } from "../../utils/trpc"
+import styles from "./styles.module.scss"
 
 const MainLayout: FC = () => {
-  useAuthProtect()
+  const currentUserQuery = trpc.user.getCurrentUser.useQuery()
+
+  useAuthStore.setState({ user: currentUserQuery.data })
 
   return (
     <>

@@ -1,9 +1,7 @@
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
-import { getCookieObject } from "utils"
-import { CookieKeys } from "utils/enums"
-import type { AuthCookie } from "utils/types"
+import { useAuthStore } from "@/store/auth"
 import { cls } from "@/utils/helpers.ts"
-import styles from "./userProfile.module.scss"
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import styles from "./styles.module.scss"
 
 type UserProfileProps = {
   image?: string
@@ -11,17 +9,29 @@ type UserProfileProps = {
   isExtraSizeName?: boolean
 } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
-const UserProfile: FC<UserProfileProps> = ({ image, name, isExtraSizeName, className, ...props }) => {
-  const authCookie = getCookieObject<AuthCookie>(CookieKeys.AuthToken)
+const UserProfile: FC<UserProfileProps> = ({
+  image,
+  name,
+  isExtraSizeName,
+  className,
+  ...props
+}) => {
+  const user = useAuthStore((state) => state.user)
 
   return (
-    <div className={cls([className, styles.userProfile], {
-      [styles._extraSizeName]: !!isExtraSizeName
-    })} {...props}>
+    <div
+      className={cls([className, styles.userProfile], {
+        [styles._extraSizeName]: !!isExtraSizeName,
+      })}
+      {...props}
+    >
       <div className={styles.img}>
-        <img src={`/images/${image ?? authCookie?.photo ?? "avatar-placeholder.png"}`} alt="Фото профиля" />
+        <img
+          src={`/images/${image ?? "avatar-placeholder.png"}`}
+          alt="Фото профиля"
+        />
       </div>
-      <span>{name ?? authCookie?.firstName}</span>
+      <span>{name ?? user?.firstName}</span>
     </div>
   )
 }

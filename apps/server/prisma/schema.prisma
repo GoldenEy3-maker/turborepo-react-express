@@ -6,24 +6,23 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id         String   @id @default(uuid()) @map("_id")
-  login      String   @unique
-  password   String
-  firstName  String
-  lastName   String
-  middleName String?
-  email      String?
-  tel        String?
-  role       Role
-  birthDate  DateTime
-  photo      String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           String   @id @default(uuid())
+  email        String   @unique
+  password     String
+  firstName    String
+  lastName     String
+  middleName   String?
+  tel          String?
+  role         Role
+  birthDate    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  tokenVersion Int      @default(0)
 }
 
 enum Role {

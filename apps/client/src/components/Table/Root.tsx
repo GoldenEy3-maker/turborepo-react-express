@@ -1,5 +1,10 @@
-import type { CSSProperties, DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import { cls } from "@/utils/helpers.ts"
+import type {
+  CSSProperties,
+  DetailedHTMLProps,
+  FC,
+  HTMLAttributes,
+} from "react"
 import styles from "./table.module.scss"
 
 type RootProps = {
@@ -13,7 +18,12 @@ export const Root: FC<RootProps> = ({
   ...props
 }) => {
   return (
-    <div className={cls([className, styles.root])}
-      style={{ "--_template": template } as CSSProperties} {...props}>{children}</div>
+    <div
+      className={cls([className, styles.root])}
+      style={{ "--_template": template } as CSSProperties}
+      {...props}
+    >
+      {children}
+    </div>
   )
 }

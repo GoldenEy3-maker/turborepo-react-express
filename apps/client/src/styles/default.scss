@@ -12,7 +12,7 @@
 }
 
 html {
-  color-scheme: dark light;
+  color-scheme: dark;
 }
 
 html,
@@ -24,8 +24,8 @@ body {
 body {
   overflow-x: hidden;
 
-  background-color: hsl(var(--background-hsl));
-  color: hsl(var(--on-background-hsl));
+  background-color: hsl(var(--surface-hsl));
+  color: hsl(var(--on-surface-hsl));
 
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -38,15 +38,15 @@ body {
   }
 }
 
-a {
-  color: hsl(var(--primary-hsl));
-}
-
 a,
 a:link,
 a:visited,
 a:hover {
   text-decoration: none;
+}
+
+a {
+  color: hsl(var(--primary-hsl));
 }
 
 aside,
@@ -71,7 +71,6 @@ img,
 svg {
   height: auto;
 }
-
 
 img,
 picture,

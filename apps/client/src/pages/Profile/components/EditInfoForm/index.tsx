@@ -4,19 +4,16 @@ import Input from "@/components/Input"
 import * as Section from "@/components/Section"
 import { InputMaskPatterns } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
-import { useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import InputMask from "react-input-mask"
 import { toast } from "react-toastify"
-import { getCookieObject, validateEmail, validateTelPattern } from "utils"
-import { CookieKeys } from "utils/enums"
-import type { AuthCookie, ValueOf } from "utils/types"
+import { validateService } from "services"
+import type { ValueOf } from "utils/types/helper"
 
 const FormStateKeys = {
   FirstName: "firstName",
   LastName: "lastName",
   MiddleName: "middleName",
-  Login: "login",
   Email: "email",
   Tel: "tel",
   OldPassword: "oldPassword",
@@ -42,7 +39,6 @@ const EdiInfoForm = () => {
       email: "",
       firstName: "",
       lastName: "",
-      login: "",
       middleName: "",
       newPassword: "",
       oldPassword: "",
@@ -69,18 +65,20 @@ const EdiInfoForm = () => {
     },
   })
 
-  useEffect(() => {
-    const authCookie = getCookieObject<AuthCookie>(CookieKeys.AuthToken)
+  // useEffect(() => {
+  //   const authCookie = cookieService.getCookieObject<AuthCookie>(
+  //     CookieKeys.AuthToken
+  //   )
 
-    if (authCookie) {
-      setValue("firstName", authCookie.firstName)
-      setValue("lastName", authCookie.lastName)
-      setValue("middleName", authCookie.middleName ?? "")
-      setValue("login", authCookie.login)
-      setValue("email", authCookie.email ?? "")
-      setValue("tel", authCookie.tel ?? "")
-    }
-  }, [setValue])
+  //   if (authCookie) {
+  //     setValue("firstName", authCookie.firstName)
+  //     setValue("lastName", authCookie.lastName)
+  //     setValue("middleName", authCookie.middleName ?? "")
+  //     setValue("email", authCookie.email)
+  //     setValue("email", authCookie.email ?? "")
+  //     setValue("tel", authCookie.tel ?? "")
+  //   }
+  // }, [setValue])
 
   return (
     <Section.Root>
@@ -202,7 +200,10 @@ const EdiInfoForm = () => {
                 name="tel"
                 rules={{
                   validate(value) {
-                    if (value.length !== 0 && !validateTelPattern(value))
+                    if (
+                      value.length !== 0 &&
+                      !validateService.validateTelPattern(value)
+                    )
                       return "Невалидный номер телефона!"
                   },
                 }}
@@ -234,39 +235,13 @@ const EdiInfoForm = () => {
             <Form.Group>
               <Controller
                 control={control}
-                name="login"
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Обязательное поле!",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    label="Логин"
-                    type="text"
-                    leadingIcon={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24"
-                        viewBox="0 -960 960 960"
-                        width="24"
-                      >
-                        <path d="M480-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160-160v-94q0-38 19-65t49-41q67-30 128.5-45T480-420q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800-292 800-254v94H160Zm60-60h520v-34q0-16-9.5-30.5T707-306q-64-31-117-42.5T480-360q-57 0-111 11.5T252-306q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570-631q0-39-25.5-64.5T480-721q-39 0-64.5 25.5T390-631q0 39 25.5 64.5T480-541Zm0-90Zm0 411Z" />
-                      </svg>
-                    }
-                    validError={errors.login?.message}
-                    disabled={updateInfoMut.isLoading}
-                    {...field}
-                  />
-                )}
-              />
-              <Controller
-                control={control}
                 name="email"
                 rules={{
                   validate(value) {
-                    if (value.length !== 0 && !validateEmail(value))
+                    if (
+                      value.length !== 0 &&
+                      !validateService.validateEmail(value)
+                    )
                       return "Невалидный email-адрес!"
                   },
                 }}

@@ -1,8 +1,8 @@
-import type { FC } from "react"
 import * as Section from "@/components/Section"
-import styles from "./popularTopics.module.scss"
+import type { FC } from "react"
 import { FaFigma, FaReact } from "react-icons/fa"
 import { TbBrandAngular, TbBrandNextjs, TbBrandVue } from "react-icons/tb"
+import styles from "./styles.module.scss"
 
 const PopularTopics: FC = () => {
   return (
@@ -15,7 +15,7 @@ const PopularTopics: FC = () => {
           <li className={styles.item}>
             <div className={styles.itemWrapper}>
               <span>
-               <FaReact />
+                <FaReact />
               </span>
               <p>React</p>
             </div>
@@ -24,7 +24,7 @@ const PopularTopics: FC = () => {
           <li className={styles.item}>
             <div className={styles.itemWrapper}>
               <span>
-               <TbBrandNextjs />
+                <TbBrandNextjs />
               </span>
               <p>Next</p>
             </div>
@@ -33,7 +33,7 @@ const PopularTopics: FC = () => {
           <li className={styles.item}>
             <div className={styles.itemWrapper}>
               <span>
-              <TbBrandAngular />
+                <TbBrandAngular />
               </span>
               <p>Angular</p>
             </div>
@@ -42,7 +42,7 @@ const PopularTopics: FC = () => {
           <li className={styles.item}>
             <div className={styles.itemWrapper}>
               <span>
-               <TbBrandVue />
+                <TbBrandVue />
               </span>
               <p>Vue</p>
             </div>
@@ -51,7 +51,7 @@ const PopularTopics: FC = () => {
           <li className={styles.item}>
             <div className={styles.itemWrapper}>
               <span>
-               <FaFigma />
+                <FaFigma />
               </span>
               <p>Дизайн</p>
             </div>
