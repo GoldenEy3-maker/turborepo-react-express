@@ -1,13 +1,15 @@
 import Button from "@/components/Button"
 import { useSelectContext } from "@/components/Select/context.tsx"
 import { cls } from "@/utils/helpers.ts"
-import type { DetailedHTMLProps, FC, InputHTMLAttributes } from "react"
 import { useEffect, useRef } from "react"
 import styles from "./styles.module.scss"
 
-export const Trigger: FC<
+export const Trigger: React.FC<
   Omit<
-    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+    React.DetailedHTMLProps<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >,
     "type"
   >
 > = ({ value, className, ...props }) => {

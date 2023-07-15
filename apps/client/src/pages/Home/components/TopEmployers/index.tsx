@@ -1,11 +1,10 @@
-import type { FC } from "react"
-import * as Section from "@/components/Section"
 import Link from "@/components/Link"
+import RatingSpan from "@/components/RatingSpan"
+import * as Section from "@/components/Section"
 import * as Table from "@/components/Table"
 import UserProfile from "@/components/UserProfile"
-import RatingSpan from "@/components/RatingSpan"
 
-const TopEmployers: FC = () => {
+const TopEmployers: React.FC = () => {
   return (
     <Section.Root>
       <Section.Header>
@@ -13,7 +12,7 @@ const TopEmployers: FC = () => {
         <Link to="#" title="Посмотреть всех">Посмотреть всех</Link>
       </Section.Header>
       <Section.Content>
-        <Table.Root template="1fr 1fr 1fr 1fr">
+        <Table.Root template="1fr 0.5fr 0.5fr 0.5fr">
           <Table.Head>
             <Table.Row>
               <Table.Cell>Профиль</Table.Cell>
@@ -25,7 +24,7 @@ const TopEmployers: FC = () => {
           <Table.Body>
             <Table.Row>
               <Table.Cell>
-                <UserProfile />
+                <UserProfile name="Иван"/>
               </Table.Cell>
               <Table.Cell>20</Table.Cell>
               <Table.Cell><RatingSpan value={4.7} /></Table.Cell>
@@ -33,7 +32,7 @@ const TopEmployers: FC = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <UserProfile />
+                <UserProfile name="Гоша"/>
               </Table.Cell>
               <Table.Cell>20</Table.Cell>
               <Table.Cell><RatingSpan value={4.7} /></Table.Cell>
@@ -41,7 +40,7 @@ const TopEmployers: FC = () => {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
-                <UserProfile />
+                <UserProfile name="Григорий"/>
               </Table.Cell>
               <Table.Cell>20</Table.Cell>
               <Table.Cell><RatingSpan value={4.7} /></Table.Cell>

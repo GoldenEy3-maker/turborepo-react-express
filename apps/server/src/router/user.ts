@@ -4,111 +4,61 @@ import { CookieKeys } from "utils/enums"
 import { z } from "zod"
 import UserDto from "../dtos/user.dto"
 import ApiError from "../exeptions/apiError.exeption"
+import imageService from "../services/image.service"
 import mailService from "../services/mail.service"
 import tokenService from "../services/token.service"
 import { authedProcedure, publicProcedure, router } from "../trpc"
 
 export const userRouter = router({
-  getCurrentUser: authedProcedure.query(({ ctx: { user } }) => {
+  getCurrent: authedProcedure.query(({ ctx: { user } }) => {
     return { ...user }
   }),
-  uploadAvatar: publicProcedure
+  uploadAvatar: authedProcedure
     .input(
       z.object({
         base64: z.string(),
-        name: z.string(),
+        fileName: z.string(),
       })
     )
-    .mutation(async () => {
-      // const authCookie = req.cookies[CookieKeys.AuthToken] as AuthCookie
+    .mutation(async ({ input, ctx: { user, prisma } }) => {
+      const uploadedPath = await imageService.uploadAvatar({
+        base64: input.base64,
+        fileName: input.fileName,
+        userId: user.id,
+      })
 
-      // const fileName = await uploadImage(input.base64, input.name)
+      if (user.avatar) await imageService.deleteAvatar(user.avatar)
 
-      // try {
-      //   await prisma.profile.update({
-      //     where: {
-      //       userId: authCookie.id
-      //     },
-      //     data: {
-      //       photo: fileName
-      //     }
-      //   })
-      // } catch {
-      //   throw new Error("Ошибка базы данных!")
-      // }
+      const updatedUser = await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          avatar: uploadedPath.path,
+        },
+      })
 
-      // if (authCookie.profile?.photo) await deleteImage(authCookie.profile.photo)
-
-      // res.cookie(CookieKeys.AuthToken, { ...authCookie, photo: fileName }, {
-      //   maxAge: 1000 * 60 * 60 * 24 * 30 * 3
-      // })
-
-      return "Test"
+      return updatedUser
     }),
-  updateInfo: publicProcedure
+  editInfo: authedProcedure
     .input(
       z.object({
-        firstName: z.string(),
-        lastName: z.string(),
-        middleName: z.string().optional(),
+        fullName: z.string(),
         tel: z.string().optional(),
         email: z.string().optional(),
-        oldPassword: z.string().optional(),
-        newPassword: z.string().optional(),
       })
     )
-    .mutation(async () => {
-      // const input = { ...restInput, middleName, email, tel }
+    .mutation(async ({ ctx: { prisma, user }, input }) => {
+      const { fullName, ...restInput } = input
 
-      // const authCookie = req.cookies[CookieKeys.AuthToken] as AuthCookie
+      const [lastName, firstName, middleName] = fullName.split(" ")
 
-      // let newUser
-
-      // try {
-      //   let newHashedPassword
-
-      //   if (oldPassword && newPassword) {
-      //     const userPassword = await prisma.user.findUnique({
-      //       where: {
-      //         id: authCookie.id,
-      //       },
-      //       select: {
-      //         password: true,
-      //       },
-      //     })
-
-      //     const isMatch = await bcrypt.compare(
-      //       oldPassword,
-      //       userPassword?.password!
-      //     )
-
-      //     if (!isMatch) throw ApiError.BadRequest("Введен неверный пароль!")
-
-      //     newHashedPassword = await bcrypt.hash(newPassword, 10)
-      //   }
-
-      //   newUser = await prisma.user.update({
-      //     where: {
-      //       id: authCookie.id,
-      //     },
-      //     data: newHashedPassword
-      //       ? { ...input, password: newHashedPassword }
-      //       : input,
-      //   })
-      // } catch (error: unknown) {
-      //   if (error instanceof ApiError)
-      //     throw ApiError.BadRequest(error.message)
-
-      //   throw ApiError.BadRequest("Неожиданная ошибка!")
-      // }
-
-      // res.cookie(
-      //   CookieKeys.AuthToken,
-      //   { ...newUser, token: authCookie.token },
-      //   {
-      //     maxAge: 1000 * 60 * 60 * 24 * 30 * 3,
-      //   }
-      // )
+      const newUser = await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: { ...restInput, lastName, firstName, middleName },
+      })
 
       return { message: "Данные успешно обновлены!" }
     }),
@@ -148,6 +98,7 @@ export const userRouter = router({
         birthDate: new Date(input.birthDate),
         password: hashedPassword,
         tel: null,
+        avatar: null,
       })
 
       await mailService.sendMail(

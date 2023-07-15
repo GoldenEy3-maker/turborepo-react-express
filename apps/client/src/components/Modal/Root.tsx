@@ -1,30 +1,31 @@
 import { cls } from "@/utils/helpers"
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import React from "react"
 import styles from "./styles.module.scss"
 
 type RootProps = {
   closeHandler?: () => void
-} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>
 
-export const Root: FC<RootProps> = ({
-  closeHandler,
-  className,
-  children,
-  ...props
-}) => {
-  return (
-    <div
-      className={cls([className, styles.root])}
-      onPointerDown={(e) => {
-        if (
-          !(e.target as HTMLElement).closest("[data-modal-prevent]") &&
-          closeHandler
-        )
-          closeHandler()
-      }}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-}
+export const Root = React.forwardRef<HTMLDivElement, RootProps>(
+  ({ closeHandler, className, children, ...props }, ref) => {
+    return (
+      <div
+        className={cls([className, styles.root])}
+        ref={ref}
+        onPointerDown={(e) => {
+          if (
+            !(e.target as HTMLElement).closest("[data-modal-prevent]") &&
+            closeHandler
+          )
+            closeHandler()
+        }}
+        {...props}
+      >
+        {children}
+      </div>
+    )
+  }
+)

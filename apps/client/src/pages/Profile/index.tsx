@@ -1,16 +1,15 @@
-import type { FC } from "react"
-import EditInfoForm from "./components/EditInfoForm"
-import InfoSidebar from "./components/InfoSidebar"
+import Resume from "./components/Resume"
+import ProfileSidebar from "./components/Sidebar"
 import Stats from "./components/Stats"
 import styles from "./profile.module.scss"
 
-const ProfilePage: FC = () => {
+const ProfilePage: React.FC = () => {
   return (
     <main className={styles.profile}>
-      <InfoSidebar />
+      <ProfileSidebar />
       <div className={styles.wrapper}>
         <Stats />
-        <EditInfoForm />
+        <Resume />
       </div>
     </main>
   )

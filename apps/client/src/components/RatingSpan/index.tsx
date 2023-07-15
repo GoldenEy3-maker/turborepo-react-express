@@ -1,6 +1,6 @@
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
-import styles from "./ratingSpan.module.scss"
 import { cls } from "@/utils/helpers.ts"
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import styles from "./styles.module.scss"
 
 type RatingSpanProps = {
   value: number

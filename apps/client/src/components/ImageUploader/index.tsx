@@ -32,7 +32,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
             src={
               previews
                 ? previews[0].base64
-                : `/images/${currentImage ?? "avatar-placeholder.png"}`
+                : currentImage ?? "/images/avatar-placeholder.png"
             }
             alt="Фото профиля"
           />

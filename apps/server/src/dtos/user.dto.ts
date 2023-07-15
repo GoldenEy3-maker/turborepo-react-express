@@ -14,6 +14,7 @@ export default class UserDto {
   tel: string | null
   role: Role
   birthDate: Date
+  avatar: string | null
 
   constructor(model: UserModel) {
     this.email = model.email
@@ -24,5 +25,6 @@ export default class UserDto {
     this.tel = model.tel
     this.role = model.role
     this.birthDate = model.birthDate
+    this.avatar = model.avatar
   }
 }

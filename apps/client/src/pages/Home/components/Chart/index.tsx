@@ -29,7 +29,7 @@ const SortSelectValues = {
 
 type SortSelectValues = ValueOf<typeof SortSelectValues>
 
-const Chart = () => {
+const Chart: React.FC = () => {
   const [typeSelectState, setTypeSelectState] =
     useState<TypeSelectValues>("Заказов")
   const [sortSelectState, setSortSelectState] =
@@ -88,7 +88,7 @@ const Chart = () => {
 
     tooltipEl.style.opacity = "1"
     tooltipEl.style.left = offsetLeft + tooltip.caretX + "px"
-    tooltipEl.style.top = offsetTop + tooltip.caretY + "px"
+    tooltipEl.style.top = offsetTop + tooltip.caretY - 10 + "px"
   }
 
   const highlightActiveLabelOnHover = (
@@ -143,23 +143,23 @@ const Chart = () => {
           data={{
             labels:
               sortSelectState === "Месяц"
-                ? dateService.getDaysOfCurrentMonth()
+                ? dateService.getDaysInMonth()
                 : dateService.getMonths(),
             datasets: [
               {
                 fill: true,
                 data: (sortSelectState === "Месяц"
-                  ? dateService.getDaysOfCurrentMonth()
+                  ? dateService.getDaysInMonth()
                   : dateService.getMonths()
                 ).map(() => getRandomNumber(50000, 100000)),
-                borderColor: "hsl(274, 69%, 80%)",
+                borderColor: "hsl(274, 80%, 80%)",
               },
             ],
           }}
           gradiant={{
             top: {
               offset: 0.6,
-              color: "hsla(274, 69%, 80%, .2)",
+              color: "hsla(274, 80%, 80%, .2)",
             },
             bottom: {
               offset: 1,

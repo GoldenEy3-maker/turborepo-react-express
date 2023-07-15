@@ -29,7 +29,7 @@ export default new class DateService {
     return Array.from({ length: 12 }, (e, i) => new Date(new Date().getFullYear(), i, 1))
   }
 
-  getDaysOfCurrentMonth() {
+  getDaysInMonth() {
     const date = new Date()
     const value = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
     return Array.from({ length: value }, (e, i) => new Date(date.getFullYear(), date.getMonth(), i + 1))

@@ -8,7 +8,7 @@ const Stats = () => {
         <li className={styles.item}>
           <div className={styles.info}>
             <h4 className={styles.title}>Активность</h4>
-            <p>Ваша активность работы</p>
+            <p>Активность на ресурсе</p>
             {/* <span>25</span> */}
           </div>
           <div className={styles.progress}>

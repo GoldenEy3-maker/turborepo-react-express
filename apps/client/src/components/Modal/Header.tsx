@@ -1,24 +1,18 @@
 import { cls } from "@/utils/helpers"
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./styles.module.scss"
 
-type HeaderProps = {
-  spaceBetween?: boolean
-} & DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
+type HeaderProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLElement>,
+  HTMLElement
+>
 
-export const Header: FC<HeaderProps> = ({
-  spaceBetween,
+export const Header: React.FC<HeaderProps> = ({
   className,
   children,
   ...props
 }) => {
   return (
-    <header
-      className={cls([className, styles.header], {
-        [styles._spaceBetween]: !!spaceBetween,
-      })}
-      {...props}
-    >
+    <header className={cls([className, styles.header])} {...props}>
       {children}
     </header>
   )

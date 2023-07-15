@@ -3,15 +3,17 @@ import {
   type SelectContextState,
 } from "@/components/Select/context.tsx"
 import { cls } from "@/utils/helpers.ts"
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import { useEffect, useRef, useState } from "react"
 import styles from "./styles.module.scss"
 
 type RootProps = {
   label?: string
-} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>
 
-export const Root: FC<RootProps> = ({
+export const Root: React.FC<RootProps> = ({
   label,
   className,
   children,
@@ -24,16 +26,22 @@ export const Root: FC<RootProps> = ({
     triggerRef: { current: null },
   })
 
-  const clickDocumentHandler = (event: MouseEvent) => {
+  const closeOnDocClick = (event: MouseEvent) => {
     if (!rootRef.current?.contains(event.target as HTMLElement)) {
       setContextState((state) => ({ ...state, isOpen: false }))
     }
   }
 
-  useEffect(() => {
-    document.addEventListener("click", clickDocumentHandler)
+  const closeOnBlur: React.FocusEventHandler = (event) => {
+    if (!rootRef.current?.contains(event.relatedTarget as HTMLElement)) {
+      setContextState((state) => ({ ...state, isOpen: false }))
+    }
+  }
 
-    return () => document.removeEventListener("click", clickDocumentHandler)
+  useEffect(() => {
+    document.addEventListener("click", closeOnDocClick)
+
+    return () => document.removeEventListener("click", closeOnDocClick)
   }, [])
 
   return (
@@ -45,17 +53,7 @@ export const Root: FC<RootProps> = ({
         {...props}
       >
         {label ? <span className={styles.label}>{label}</span> : null}
-        <div
-          className={styles.wrapper}
-          ref={rootRef}
-          onBlur={(event) => {
-            if (
-              !rootRef.current?.contains(event.relatedTarget as HTMLElement)
-            ) {
-              setContextState((state) => ({ ...state, isOpen: false }))
-            }
-          }}
-        >
+        <div className={styles.wrapper} ref={rootRef} onBlur={closeOnBlur}>
           {children}
         </div>
       </div>

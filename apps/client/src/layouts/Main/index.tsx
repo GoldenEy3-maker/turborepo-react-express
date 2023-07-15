@@ -2,15 +2,17 @@ import Header from "@/components/Header"
 import Sidebar from "@/components/Sidebar"
 import { useAuthStore } from "@/store/auth"
 import { cls } from "@/utils/helpers"
-import type { FC } from "react"
+import { useEffect } from "react"
 import { Outlet } from "react-router-dom"
 import { trpc } from "../../utils/trpc"
 import styles from "./styles.module.scss"
 
-const MainLayout: FC = () => {
-  const currentUserQuery = trpc.user.getCurrentUser.useQuery()
+const MainLayout: React.FC = () => {
+  const currentUserQuery = trpc.user.getCurrent.useQuery()
 
-  useAuthStore.setState({ user: currentUserQuery.data })
+  useEffect(() => {
+    useAuthStore.setState({ user: currentUserQuery.data })
+  }, [currentUserQuery.data])
 
   return (
     <>

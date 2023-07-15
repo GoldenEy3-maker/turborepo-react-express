@@ -30,10 +30,4 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
-
-  &._extraSizeName {
-    span {
-      font-size: var(--title-l-fs);
-    }
-  }
 }

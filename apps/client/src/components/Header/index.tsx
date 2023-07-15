@@ -1,5 +1,6 @@
 import { useAuthStore } from "@/store/auth"
 import type { FC } from "react"
+import Skeleton from "react-loading-skeleton"
 import styles from "./styles.module.scss"
 
 const Header: FC = () => {
@@ -21,9 +22,13 @@ const Header: FC = () => {
 
   return (
     <header className={styles.header}>
-      <h1 className="page-title">
-        {getGreetings()}, <span className="rich-text">{user?.firstName}</span>!
-      </h1>
+      {user ? (
+        <h1 className="page-title">
+          {getGreetings()}, <span className="rich-text">{user.firstName}</span>!
+        </h1>
+      ) : (
+        <Skeleton width="25em" height="3em" />
+      )}
     </header>
   )
 }

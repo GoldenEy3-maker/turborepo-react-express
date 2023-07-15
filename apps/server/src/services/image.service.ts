@@ -1,10 +1,16 @@
-import fs from "fs/promises"
-import path from "path"
+import { supabase } from "../../supabase"
 import ApiError from "../exeptions/apiError.exeption"
-import { DirectoryPaths } from "../utils/enums"
 
 export default new (class ImageService {
-  async upload(base64: string, fileName: string) {
+  async uploadAvatar({
+    base64,
+    fileName,
+    userId,
+  }: {
+    base64: string
+    fileName: string
+    userId: string
+  }) {
     try {
       const buffer = Buffer.from(
         base64.replace(/^(data:image\/\w{3,4};base64,)/, ""),
@@ -16,38 +22,33 @@ export default new (class ImageService {
       const hashedFileName =
         Date.now().toString() + "_" + name.replace(/\s/g, "-") + "." + fileExt
 
-      await fs.writeFile(
-        path.join(
-          path.dirname(process.cwd()),
-          DirectoryPaths.PublicClientImages,
-          hashedFileName
-        ),
-        buffer
-      )
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .upload(userId + "/" + hashedFileName, buffer)
 
-      return hashedFileName
-    } catch (err: unknown) {
-      if (err instanceof ApiError) {
-        throw ApiError.BadRequest(err.message)
-      }
+      if (error) throw ApiError.BadRequest(error.message)
 
-      throw ApiError.BadRequest("Неожиданная ошибка! Попробуйте позже")
+      return data
+    } catch (e: unknown) {
+      if (e instanceof ApiError) throw new ApiError(e.code, e.message)
+
+      throw ApiError.BadRequest("Неожиданная ошибка!")
     }
   }
 
-  async delete(fileName: string) {
+  async deleteAvatar(path: string) {
     try {
-      await fs.unlink(
-        path.join(
-          path.dirname(process.cwd()),
-          DirectoryPaths.PublicClientImages,
-          fileName
-        )
-      )
-    } catch (err: unknown) {
-      if (err instanceof ApiError) throw ApiError.BadRequest(err.message)
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .remove([path])
 
-      throw ApiError.BadRequest("Неожиданная ошибка! Попробуйте позже")
+      if (error) throw ApiError.BadRequest(error.message)
+
+      return data
+    } catch (e: unknown) {
+      if (e instanceof ApiError) throw new ApiError(e.code, e.message)
+
+      throw ApiError.BadRequest("Неожиданная ошибка!")
     }
   }
 })()

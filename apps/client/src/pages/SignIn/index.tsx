@@ -8,8 +8,8 @@ import { cls } from "@/utils/helpers"
 import { trpc } from "@/utils/trpc"
 import type { FC } from "react"
 import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import { Link, useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
 import { validateService } from "services"
 import type { ValueOf } from "utils/types/helper"
 import styles from "./styles.module.scss"
@@ -30,18 +30,14 @@ const SignInPage: FC = () => {
 
   const signInMut = trpc.user.signIn.useMutation({
     onSuccess(data) {
-      toast("Авторизация прошла успешно!", {
-        type: "success",
-      })
+      toast.success("Авторизация прошла успешно!")
 
       useAuthStore.setState({ token: data })
 
       navigate(RouterPaths.HomePage)
     },
     onError(error) {
-      toast(error.message, {
-        type: "error",
-      })
+      toast.error(error.message)
     },
   })
 

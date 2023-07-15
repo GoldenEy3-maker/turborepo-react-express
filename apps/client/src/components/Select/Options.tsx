@@ -1,15 +1,17 @@
 import { useSelectContext } from "@/components/Select/context.tsx"
 import { useRippleEffect } from "@/hooks/rippleEffect.hook"
 import { cls } from "@/utils/helpers.ts"
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import styles from "./styles.module.scss"
 
 type OptionsProps = {
   values: string[]
   handler: (value: string) => void
-} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>
 
-export const Options: FC<OptionsProps> = ({
+export const Options: React.FC<OptionsProps> = ({
   values,
   handler,
   className,

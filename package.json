@@ -4,7 +4,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "prisma-generate": "turbo run db:generate",
-    "prisma-push": "turbo run db:push"
+    "prisma-push": "turbo run db:push",
+    "prisma-studio": "turbo run prisma:studio"
   },
   "devDependencies": {
     "@turbo/gen": "^1.9.7",

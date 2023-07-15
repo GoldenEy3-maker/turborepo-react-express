@@ -45,6 +45,16 @@ a:hover {
   text-decoration: none;
 }
 
+::-moz-selection {
+  color: hsl(var(--surface-hsl));
+  background: hsl(var(--primary-hsl));
+}
+
+::selection {
+  color: hsl(var(--surface-hsl));
+  background: hsl(var(--primary-hsl));
+}
+
 a {
   color: hsl(var(--primary-hsl));
 }

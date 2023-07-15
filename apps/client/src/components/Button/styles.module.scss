@@ -136,7 +136,7 @@
     }
   }
 
-  &:focus-visible {
+  &:focus {
     --_bg-clr: var(--primary-container-high-hsl);
     --_clr: var(--primary-hsl);
 

@@ -8,9 +8,9 @@ import { InputMaskPatterns, QueryKeys, RouterPaths } from "@/utils/enums"
 import { trpc } from "@/utils/trpc"
 import type { FC } from "react"
 import { Controller, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import InputMask from "react-input-mask"
 import { Link } from "react-router-dom"
-import { toast } from "react-toastify"
 import { dateService, validateService } from "services"
 import type { ValueOf } from "utils/types/helper"
 import styles from "./styles.module.scss"
@@ -56,12 +56,13 @@ const SignUpPage: FC = () => {
 
   const signUpMut = trpc.user.signUp.useMutation({
     onError(error) {
-      toast(error.message, { type: "error" })
+      console.log(error)
+      toast.error(error.message)
     },
     onSuccess() {
-      toast("На указанную почту выслано приглашение для активации аккаунта!", {
-        type: "success",
-      })
+      toast.success(
+        "На указанную почту выслано приглашение для активации аккаунта!"
+      )
 
       reset()
     },
