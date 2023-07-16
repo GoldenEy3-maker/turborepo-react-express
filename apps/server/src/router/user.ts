@@ -40,28 +40,6 @@ export const userRouter = router({
 
       return updatedUser
     }),
-  editInfo: authedProcedure
-    .input(
-      z.object({
-        fullName: z.string(),
-        tel: z.string().optional(),
-        email: z.string().optional(),
-      })
-    )
-    .mutation(async ({ ctx: { prisma, user }, input }) => {
-      const { fullName, ...restInput } = input
-
-      const [lastName, firstName, middleName] = fullName.split(" ")
-
-      const newUser = await prisma.user.update({
-        where: {
-          id: user.id,
-        },
-        data: { ...restInput, lastName, firstName, middleName },
-      })
-
-      return { message: "Данные успешно обновлены!" }
-    }),
   signUp: publicProcedure
     .input(
       z.object({

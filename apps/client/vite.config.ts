@@ -1,9 +1,11 @@
 import react from "@vitejs/plugin-react"
 import path from "path"
-import { defineConfig } from "vite"
+import { defineConfig, loadEnv } from "vite"
 
 // https://vitejs.dev/config/
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd())
+
   return {
     plugins: [react()],
     resolve: {
@@ -15,7 +17,7 @@ export default defineConfig(() => {
       port: 3000,
       proxy: {
         "/api": {
-          target: process.env.SERVER_ORIGIN_URL ?? `http://localhost:9000`,
+          target: env.VITE_API_URL,
           changeOrigin: true,
         },
       },
