@@ -27,7 +27,10 @@ app.post("/refresh_token", async (req, res) => {
   try {
     const refresh_token = req.cookies[CookieKeys.RefreshToken]
 
-    if (!refresh_token) throw ApiError.Unauthorized("Refresh token not found!")
+    if (!refresh_token)
+      throw ApiError.Unauthorized(
+        `Refresh token not found! ${JSON.stringify(req.cookies)}`
+      )
 
     const refreshTokenPayload = tokenService.verifyRefreshToken(refresh_token)
 

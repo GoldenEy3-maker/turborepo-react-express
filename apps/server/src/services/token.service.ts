@@ -29,7 +29,7 @@ export default new (class TokenService {
     const refreshToken = jwt.sign(
       { id: payload.id, tokenVersion: payload.tokenVersion },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "30d" }
+      { expiresIn: "7d" }
     )
 
     return { accessToken, refreshToken }
@@ -89,7 +89,6 @@ export default new (class TokenService {
 
   sendRefreshToken(res: Response, token: string) {
     res.cookie(CookieKeys.RefreshToken, token, {
-      secure: true,
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     })
