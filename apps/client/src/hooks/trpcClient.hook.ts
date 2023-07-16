@@ -42,8 +42,8 @@ export const useTrpcClient = () => {
                 return response
               }
 
-              const refreshData: { accessToken: string } =
-                await refreshResponse.json()
+              const refreshData =
+                (await refreshResponse.json()) as { accessToken: string }
 
               useAuthStore.setState({ token: refreshData.accessToken })
 

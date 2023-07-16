@@ -3,6 +3,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "preview": "turbo run preview",
     "prisma-generate": "turbo run db:generate",
     "prisma-push": "turbo run db:push",
     "prisma-studio": "turbo run prisma:studio"

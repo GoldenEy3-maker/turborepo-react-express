@@ -27,11 +27,12 @@ app.post("/refresh_token", async (req, res) => {
   try {
     const refresh_token = req.cookies[CookieKeys.RefreshToken]
 
-    if (!refresh_token) throw ApiError.Unauthorized()
+    if (!refresh_token) throw ApiError.Unauthorized("Refresh token not found!")
 
     const refreshTokenPayload = tokenService.verifyRefreshToken(refresh_token)
 
-    if (!refreshTokenPayload) throw ApiError.Unauthorized()
+    if (!refreshTokenPayload)
+      throw ApiError.Unauthorized("Refresh token is not valid!")
 
     const user = await prisma.user.findUnique({
       where: {
@@ -39,10 +40,10 @@ app.post("/refresh_token", async (req, res) => {
       },
     })
 
-    if (!user) throw ApiError.Unauthorized()
+    if (!user) throw ApiError.Unauthorized("User in refresh token not found!")
 
     if (user.tokenVersion !== refreshTokenPayload.tokenVersion)
-      throw ApiError.Unauthorized()
+      throw ApiError.Unauthorized("Token versions are not matched!")
 
     const { accessToken, refreshToken } = tokenService.generateTokens(user)
 
