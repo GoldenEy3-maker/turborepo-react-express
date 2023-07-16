@@ -89,6 +89,7 @@ export default new (class TokenService {
 
   sendRefreshToken(res: Response, token: string) {
     res.cookie(CookieKeys.RefreshToken, token, {
+      domain: "turborepo-react-express-server.vercel.app",
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 7,
     })
